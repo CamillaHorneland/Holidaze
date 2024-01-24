@@ -1,4 +1,3 @@
-// import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import VenuesPage from "./pages/VenuesPage";
@@ -14,13 +13,13 @@ import VenueManagerSpecificPage from "./pages/VenueManagerSpecificPage";
 import AddVenuePage from "./pages/AddVenuePage";
 import VenueManagerDeleteEditPage from "./pages/VenueManagerDeleteEditPage";
 import NotFoundPage from "./pages/NotFoundPage";
-// import Layout from "./components/layout/Layout";
+import Layout from "./components/layout/Layout";
 
 
 function App() {
     return (
       <Routes>
-          {/* <Route path="/" element={<Layout />}> */}
+          <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
              <Route path="venues" element={<VenuesPage />} />
             <Route path="venuesspesific/:id" element={<VenuesSpecificPage />} />
@@ -35,7 +34,7 @@ function App() {
             <Route path="addvenue" element={<AddVenuePage />} />
             <Route path="venuemanageredit" element={<VenueManagerDeleteEditPage />} />
             <Route path="*" element={<NotFoundPage />} />
-          {/* </Route> */}
+          </Route>
     </Routes>
   );
 }
