@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
+import { UserProvider } from './components/type/UserContext';
 import HomePage from "./pages/HomePage";
 import VenuesPage from "./pages/VenuesPage";
 import VenuesSpecificPage from "./pages/VenuesSpecificPage";
@@ -18,13 +19,15 @@ import Layout from "./components/layout/Layout";
 
 function App() {
     return (
-      <Routes>
+   
+      <UserProvider>
+        <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-             <Route path="venues" element={<VenuesPage />} />
-            <Route path="venuesspesific/:id" element={<VenuesSpecificPage />} />
+            <Route path="venues" element={<VenuesPage />} />
+            <Route path="venuesspecific/:id" element={<VenuesSpecificPage />} />
             <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage/>} />
+            <Route path="register" element={<RegisterPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="booking" element={<BookingPage />} />
@@ -35,7 +38,9 @@ function App() {
             <Route path="venuemanageredit" element={<VenueManagerDeleteEditPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
-    </Routes>
+        </Routes>
+      </UserProvider>
+    
   );
 }
 
