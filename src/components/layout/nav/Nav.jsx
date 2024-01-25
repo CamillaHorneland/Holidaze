@@ -1,14 +1,19 @@
+// Nav.js
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { HiMenuAlt2 } from "react-icons/hi";
+import { HiMenuAlt2 } from 'react-icons/hi';
+import { useUser } from '../../type/UserContext'; 
 
 const Nav = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user } = useUser();
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const isVenueManager = user && user.isVenueManager;
 
   return (
     <nav className="sm:flex sm:items-center sm:justify-between bg-blue p-4">
@@ -27,28 +32,37 @@ const Nav = () => {
             Venues
           </NavLink>
         </li>
-        <li className="m-4 group">
-          <NavLink to="/login" className="active mx-4 group-hover:underline text-lg font-bold" onClick={() => {
-            setIsMobileMenuOpen(false);
-            navigate('/login', { replace: true });
-          }}>
-            Login
-          </NavLink>
-        </li>
-        <li className="m-4 group">
-          <NavLink to="/register" className="active mx-4 group-hover:underline text-lg font-bold" onClick={() => {
-            setIsMobileMenuOpen(false);
-            navigate('/register', { replace: true });
-          }}>
-            Register
-          </NavLink>
-        </li>
+        {user && user.role === 'guest' && (
+          <>
+            <li className="m-4 group">
+              <NavLink to="/login" className="active mx-4 group-hover:underline text-lg font-bold" onClick={() => {
+                setIsMobileMenuOpen(false);
+                navigate('/login', { replace: true });
+              }}>
+                Login
+              </NavLink>
+            </li>
+            <li className="m-4 group">
+              <NavLink to="/register" className="active mx-4 group-hover:underline text-lg font-bold" onClick={() => {
+                setIsMobileMenuOpen(false);
+                navigate('/register', { replace: true });
+              }}>
+                Register
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
 };
 
 export default Nav;
+
+
+
+
+
 
 
 
