@@ -1,8 +1,8 @@
-// Nav.js
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { HiMenuAlt2 } from 'react-icons/hi';
 import { useUser } from '../../type/UserContext'; 
+import Logo from '../header/header'; 
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ const Nav = () => {
 
   return (
     <nav className="sm:flex sm:items-center sm:justify-between bg-blue p-4">
+      <Logo />
       <HiMenuAlt2 className="m-6 text-5xl cursor-pointer sm:hidden text-white" onClick={handleToggleMobileMenu} />
       <ul className={`${isMobileMenuOpen ? 'block' : 'hidden'} sm:flex sm:space-x-4 text-white ml-auto`}>
         <li className="m-4 group">
@@ -58,6 +59,12 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+
+
+
+
 
 
 
