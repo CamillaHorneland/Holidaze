@@ -1,9 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
+import useUserStore from './UserStore';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ role: 'guest', isVenueManager: false });
+  const { user, setUser } = useUserStore();
 
   const updateUser = (newUser) => {
     setUser((prevUser) => ({ ...prevUser, ...newUser }));
@@ -17,6 +18,7 @@ export const UserProvider = ({ children }) => {
 };
 
 export const useUser = () => useContext(UserContext);
+
 
 
 
