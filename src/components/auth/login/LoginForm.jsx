@@ -8,7 +8,7 @@ import { LOGIN_URL } from "../../../constant/api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../../../assets/Loginsign.png";
-import useUserActions  from "../../type/UserStore";
+import { useUserActions } from "../../type/UserStore";
 
 
 const schema = yup
