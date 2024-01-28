@@ -5,23 +5,24 @@ import { useNavigate } from "react-router-dom";
 import ServerWarning from "../../shared/ServerWarning";
 import ValidationMessage from "../../shared/ValidationMessage";
 import { LOGIN_URL } from "../../../constant/api";
-import useUserStore from "../../type/UserStore";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../../../assets/Loginsign.png";
-// import { useUserActions } from "../../type/UserContext";
+import useUserActions  from "../../type/UserStore";
 
 
-const schema = yup.object({
-  email: yup.string().email("Please enter a valid email").required("Email is required"),
-  password: yup.string().required("Please enter a password"),
-});
+const schema = yup
+        .object({
+		email: yup.string().email("Please enter a valid email").required("Email is required"),
+		password: yup.string().required("Please enter a password"),
+	})
+	.required();
 
 function LoginForm() {
-  const [isLoading, setIsLoading] = useUserStore((state) => [state.isLoading, state.setIsLoading]);
-  const [error, setError] = useUserStore((state) => [state.error, state.setError]);
-  const setUser = useUserStore((state) => state.setUser);
-
-  const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
+	const { setUser } = useUserActions();
+	const navigate = useNavigate();
 
   const {
     register,
@@ -49,7 +50,8 @@ function LoginForm() {
       }
 
       setUser(json);
-      navigate("/dashboard");
+       console.log(json);
+      navigate("/");
 
     } catch (error) {
       setError(error.toString());

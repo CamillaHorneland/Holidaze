@@ -7,17 +7,19 @@ function Footer() {
   const { user } = useUser();
 
   return (
-    <div className="fixed bottom-0 w-full bg-light-blue h-32 flex flex-col items-center justify-center p-4">
+    <div className="fixed bottom-0 w-full bg-light-blue h-38 flex flex-col items-center justify-center p-4">
       <div className="text-black m-3 mb-4">
         <Link to="/contact">Contact us</Link>
       </div>
-      {user.role === "user" && (
+       {user && user.isLoggedIn && (
+        <>
         <div className="text-black m-3 mb-8">
           <Link to="/profile">Become a Venue Manager</Link>
         </div>
+        </>
       )}
       <div className="text-black m-3 mb-8">
-        &copy; {new Date().getFullYear()} Holidaze All rights reserved.
+        &copy; {new Date().getFullYear()} Holidaze.
       </div>
       <div className="absolute bottom-1 right-4 flex space-x-5 pt-8">
         <a href="https://www.facebook.com" className="text-black text-2xl mr-2">
@@ -35,6 +37,8 @@ function Footer() {
 }
 
 export default Footer;
+
+
 
 
 
