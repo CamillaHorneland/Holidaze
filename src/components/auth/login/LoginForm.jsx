@@ -62,7 +62,7 @@ function LoginForm() {
 
    return (
    
-   <div className="flex mt-8 m-4 items-center">
+   <div className="flex mt-8 m-4 items-center mb-16">
         <div className="hidden md:block">  
               <img src={image} alt="Your alt text" className="mb-4 w-40"/> 
         </div>

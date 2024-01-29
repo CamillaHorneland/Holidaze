@@ -7,7 +7,7 @@ function Footer() {
   const { user } = useUser();
 
   return (
-    <div className="fixed bottom-0 w-full bg-light-blue h-38 flex flex-col items-center justify-center p-4">
+    <div className="relative bottom-0 w-full bg-light-blue h-38 flex flex-col items-center justify-center p-4">
       <div className="text-black m-3 mb-4">
         <Link to="/contact">Contact us</Link>
       </div>
