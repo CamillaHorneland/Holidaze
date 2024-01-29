@@ -7,19 +7,19 @@ import Logo from '../header/header';
 
 const Nav = () => {
   const [isLogoutConfirmed, setIsLogoutConfirmed] = useState(false);
-  
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useUser();
-  const { clearUser } = useUserActions(); 
+  const { clearUser } = useUserActions();
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const isVenueManager = user && user.isVenueManager;
+  const isVenueManager = user && (user.isVenueManager || user.venueManager);
 
-   const handleLogout = () => {
+
+  const handleLogout = () => {
     if (isLogoutConfirmed) {
       clearUser();
       navigate('/login');
@@ -28,7 +28,7 @@ const Nav = () => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     setIsLogoutConfirmed(false);
   }, [user]);
 
@@ -90,23 +90,23 @@ const Nav = () => {
             </li>
             <li className="m-4 group">
               <button className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  handleLogout();
-                  }}>
-                    {isLogoutConfirmed ? 'Confirm' : 'Logout'}
+                setIsMobileMenuOpen(false);
+                handleLogout();
+              }}>
+                {isLogoutConfirmed ? 'Confirm' : 'Logout'}
               </button>
-                    {isLogoutConfirmed && (
-              <button className="active mx-4 hover:text-lg font-bold text-black" onClick={() => setIsLogoutConfirmed(false)}>
-                   Cancel
-              </button>
-                     )}
-             </li>
+              {isLogoutConfirmed && (
+                <button className="active mx-4 hover:text-lg font-bold text-black" onClick={() => setIsLogoutConfirmed(false)}>
+                  Cancel
+                </button>
+              )}
+            </li>
           </>
         )}
         {isVenueManager && (
           <>
-             <li className="m-4 group">
-              <NavLink to="/your-venues" className="active mx-4 transition-all hover:text-lgfont-bold" onClick={() => {
+            <li className="m-4 group">
+              <NavLink to="/your-venues" className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => {
                 setIsMobileMenuOpen(false);
                 navigate('/your-venues', { replace: true });
               }}>
@@ -129,6 +129,8 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
 
 
 
