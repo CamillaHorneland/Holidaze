@@ -4,6 +4,7 @@ import { HiMenuAlt2 } from 'react-icons/hi';
 import { useUser } from '../../type/UserContext'; 
 import { useUserActions } from '../../type/UserStore'; 
 import Logo from '../header/header'; 
+import VenueManagerLinks from './VenueManagerLinks'; 
 
 const Nav = () => {
   const [isLogoutConfirmed, setIsLogoutConfirmed] = useState(false);
@@ -17,7 +18,6 @@ const Nav = () => {
   };
 
   const isVenueManager = user && (user.isVenueManager || user.venueManager);
-
 
   const handleLogout = () => {
     if (isLogoutConfirmed) {
@@ -34,10 +34,10 @@ const Nav = () => {
 
   return (
     <nav className="sm:flex sm:items-center sm:justify-between bg-blue p-4">
-      <Logo />
+      
       <HiMenuAlt2 className="m-6 text-5xl cursor-pointer sm:hidden text-white" onClick={handleToggleMobileMenu} />
       <ul className={`${isMobileMenuOpen ? 'block' : 'hidden'} sm:flex sm:space-x-4 text-white ml-auto`}>
-        <li className="m-4 group">
+         <li className="m-4 group">
           <NavLink to="/" className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => setIsMobileMenuOpen(false)}>
             Home
           </NavLink>
@@ -101,26 +101,9 @@ const Nav = () => {
                 </button>
               )}
             </li>
-          </>
-        )}
-        {isVenueManager && (
-          <>
-            <li className="m-4 group">
-              <NavLink to="/your-venues" className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate('/your-venues', { replace: true });
-              }}>
-                Your Venues
-              </NavLink>
-            </li>
-            <li className="m-4 group">
-              <NavLink to="/add-venues" className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate('/add-venues', { replace: true });
-              }}>
-                Add Venues
-              </NavLink>
-            </li>
+            {isVenueManager && (
+              <VenueManagerLinks closeMobileMenu={() => setIsMobileMenuOpen(false)} />
+            )}
           </>
         )}
       </ul>
@@ -129,6 +112,14 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+
+
+
+
+
+
 
 
 
