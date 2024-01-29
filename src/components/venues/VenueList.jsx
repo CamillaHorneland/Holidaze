@@ -1,0 +1,66 @@
+import React from 'react';
+import { useQuery } from "@tanstack/react-query";
+import { ALLVENUES_URL } from "../../constant/api";
+import { Link } from "react-router-dom";
+import DefaultImage from '../../assets/Default.png';
+
+async function GetAllVenues() {
+	const response = await fetch(ALLVENUES_URL);
+
+	if (!response.ok) {
+		throw new Error("There was an error fetching the listings");
+	}
+
+	return response.json();
+}
+
+function AllVenues() {
+	const {
+		isPending,
+		error,
+		data: venues,
+		isFetching,
+	} = useQuery({
+		queryKey: ["venues"],
+		queryFn: GetAllVenues,
+		staleTime: 1000 * 60 * 5, 
+	});
+
+	if (isPending) return <div>Loading...</div>;
+
+	if (error) return "An error has occurred: " + error.message;
+
+	return (
+		<>
+			{venues?.map((venue) => {
+				return (
+					<div key={venue.id} className="card bg-light-blue p-4 rounded-md shadow-md mb-4">
+                        <h2 className="text-xl font-bold mb-2">{venue.name}</h2>
+                        {venue.media && venue.media.length > 0 && typeof venue.media[0] === 'string' ? (
+                            <img
+                                src={venue.media[0].split(',')[0]}
+                                alt={venue.name}
+                                className="w-full h-40 object-cover mb-2 rounded-md"
+                                onError={(e) => {
+                                    e.target.src = DefaultImage;
+                                }}
+                            />
+                        ) : (
+                            <img
+                                src={DefaultImage}
+                                alt={venue.name}
+                                className="w-full h-40 object-cover mb-2 rounded-md"
+                            />
+                        )}
+                        <p className="text-gray-700">Country: {venue.location.country}</p>
+                        <p className="text-gray-700">City: {venue.location.city}</p>
+                        <p className="text-gray-700">Rating: {venue.rating}</p>
+                        <Link to={`/venues/${venue.id}`} className="block mt-2 text-dark-blue hover:underline">View Venues</Link>
+                    </div>
+				);
+			})}
+		</>
+	);
+}
+
+export default AllVenues;
