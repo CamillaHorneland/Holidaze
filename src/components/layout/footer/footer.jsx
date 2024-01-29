@@ -5,18 +5,17 @@ import { useUser } from "../../type/UserContext";
 
 function Footer() {
   const { user } = useUser();
+  const isVenueManager = user && (user.isVenueManager || user.venueManager);
 
   return (
-    <div className="fixed bottom-0 w-full bg-light-blue h-38 flex flex-col items-center justify-center p-4">
+    <div className="relative bottom-0 w-full bg-light-blue h-38 flex flex-col items-center justify-center p-4">
       <div className="text-black m-3 mb-4">
         <Link to="/contact">Contact us</Link>
       </div>
-       {user && user.isLoggedIn && (
-        <>
+      {!isVenueManager && user && user.isLoggedIn && (
         <div className="text-black m-3 mb-8">
           <Link to="/profile">Become a Venue Manager</Link>
         </div>
-        </>
       )}
       <div className="text-black m-3 mb-8">
         &copy; {new Date().getFullYear()} Holidaze.
@@ -37,6 +36,7 @@ function Footer() {
 }
 
 export default Footer;
+
 
 
 
