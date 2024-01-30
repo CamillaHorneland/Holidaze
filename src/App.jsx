@@ -33,7 +33,7 @@ function App() {
             <Route path="booking" element={<BookingPage />} />
             <Route path="bookingsuccess" element={<BookingSuccessPage />} />
             <Route path="yourvenues" element={<YourVenuesPage />} />
-            <Route path="venuemanagerspecific" element={<VenueManagerSpecificPage />} />
+            <Route path="venuemanagerspecific/:id" element={<VenueManagerSpecificPage />} />
             <Route path="addvenue" element={<AddVenuePage />} />
             <Route path="venuemanageredit" element={<VenueManagerDeleteEditPage />} />
             <Route path="*" element={<NotFoundPage />} />

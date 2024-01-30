@@ -53,10 +53,14 @@ function AllVenues() {
               />
             )}
             <p className="text-gray-700 mb-2">Rating: {venue.rating}</p>
-            <p className="text-gray-700 mb-2">Country: {venue.location.country}</p>
-            <p className="text-gray-700 mb-4">City: {venue.location.city}</p>
+            <p className="text-gray-700 mb-2 h-8">
+              {venue.location.country && <span>Country: {venue.location.country}</span>}
+            </p>
+            <p className="text-gray-700 mb-4 h-8">
+              {venue.location.city && <span>City: {venue.location.city}</span>}
+            </p>
             <Link
-              to={`/venues/${venue.id}`}
+              to={`/venuesspecific/${venue.id}`}
               className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
             >
               View Venues
