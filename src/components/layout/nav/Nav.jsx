@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { HiMenuAlt2 } from 'react-icons/hi';
 import { useUser } from '../../type/UserContext'; 
 import { useUserActions } from '../../type/UserStore'; 
-import Logo from '../header/header'; 
 import VenueManagerLinks from './VenueManagerLinks'; 
 
 const Nav = () => {
