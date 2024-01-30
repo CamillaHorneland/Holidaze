@@ -1,10 +1,13 @@
-function VenuesSpecificPage() {
+import VenueDetail from "../components/venues/VenueDetail.jsx";
+
+function VenuesSpesificPage() {
 	return (
 		<>
-			<h1>Test</h1>
+
+			<VenueDetail />
 			
 		</>
 	);
 }
 
-export default VenuesSpecificPage;
+export default VenuesSpesificPage;
