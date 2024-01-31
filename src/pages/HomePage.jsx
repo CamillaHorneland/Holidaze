@@ -1,8 +1,10 @@
+import Home from "../components/landing/home";
+
 function HomePage() {
 	return (
 		<>
-			<h1>Test</h1>
-			
+			<Home />
+
 		</>
 	);
 }

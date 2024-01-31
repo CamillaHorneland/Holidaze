@@ -5,14 +5,16 @@ import Logo from "./header/header";
 
 export default function Layout() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <header>
         <Logo />
         <Nav />
       </header>
-      <main>
+      
+      <main className="flex-grow">
         <Outlet />
       </main>
+
       <footer>
         <Footer />
       </footer>
