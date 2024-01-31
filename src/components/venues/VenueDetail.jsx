@@ -38,12 +38,12 @@ function VenueDetail() {
  
 
   return (
-    <div className=" mx-auto p-4 mb-16 p-16">
+    <div className=" mx-auto p-4 m-10 mb-16 p-16">
       {data && (
         <>
-          <h1 className="text-3xl font-bold text-dark-blue mb-10">{data.name}</h1>
+          <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">{data.name}</h1>
 
-          <div className='sm:w-4/4 md:w-4/4 lg:w-4/4 lg:pr-4 mb-10'>
+          <div className='sm:w-4/4 md:w-2/4 lg:w-2/4 lg:pr-4 m-10 mb-10 overflow-hidden'>
             <img
               src={
                 selectedImageIndex !== null && data.media.length > 0
@@ -69,11 +69,11 @@ function VenueDetail() {
             )}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 m-10">
             <h3 className="text-lg font-bold">Description:</h3> {data.description}
           </div>
 
-          <div className="mb-5 bg-light-blue p-5">
+          <div className="mb-5 bg-light-blue m-10 p-5">
             <h3 className="text-lg font-bold mb-3">Location:</h3>
 
             {data.location.address && <p className="mb-2">Address: {data.location.address}</p>}
@@ -90,19 +90,19 @@ function VenueDetail() {
             )}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 m-10">
             <h3 className="text-lg font-bold">Rating:</h3> {data.rating}
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 m-10">
             <h3 className="text-lg font-bold">Price:</h3> {data.price} EUR each night.
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 m-10">
             <h3 className="text-lg font-bold">Max Guests:</h3> {data.maxGuests}
           </div>
 
-          <div className="mb-5 border border-dark-blue">
+          <div className="m-10 mb-5 border border-dark-blue">
             <h3 className="text-lg font-bold mb-3">Facilities:</h3>
             <ul className="list-none p-0 m-0">
               <li className={`flex items-center m-3 ${data.meta.wifi ? '' : 'line-through'}`}>

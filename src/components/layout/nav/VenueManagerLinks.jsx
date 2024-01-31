@@ -19,12 +19,12 @@ const VenueManagerLinks = ({ closeMobileMenu }) => {
 
   return (
     <li
-      className="m-4 group relative"
+      className="z-20"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className="mx-4 transition-all hover:text-lg font-bold border border-white rounded-md px-2 p-2 relative"
+        className="mx-4 m-2 group transition-all hover:text-lg  border border-white rounded-md px-2 p-2 relative"
         onClick={handleMouseEnter}
       >
         Venue Manager
@@ -36,14 +36,14 @@ const VenueManagerLinks = ({ closeMobileMenu }) => {
           >
             <NavLink
               to="/YourVenues"
-              className="block transition-all hover:text-lg text-blue"
+              className="block transition-all text-blue"
               onClick={handleLinkClick}
             >
               Your Venues
             </NavLink>
             <NavLink
               to="/AddVenue"
-              className="block transition-all hover:text-lg text-blue"
+              className="block transition-all text-blue"
               onClick={handleLinkClick}
             >
               Add Venues
