@@ -103,9 +103,6 @@ const Nav = () => {
                 </button>
               )}
             </li>
-            {/* {isVenueManager && (
-              <VenueManagerLinks closeMobileMenu={() => setIsMobileMenuOpen(false)} />
-            )} */}
           </>
         )}
       </ul>
