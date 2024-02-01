@@ -1,12 +1,12 @@
 import React from "react";
-import ImageBack from "./background"; 
+import ImageBack from "../landing/background"; 
 import { Link } from "react-router-dom"; 
 import VenueFilter from "../venues/VenueFilter";
 
 const Home = () => {
   return (
     <div>
-      <div className="relative mb-16">
+      <div className="relative mb-5">
         <ImageBack big />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full z-20">
           <div className="lg:flex lg:flex-col lg:items-center lg:w-2/3 xl:w-1/2 mx-auto">

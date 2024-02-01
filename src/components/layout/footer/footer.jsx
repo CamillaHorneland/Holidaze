@@ -17,17 +17,17 @@ function Footer() {
           <Link to="/profile">Become a Venue Manager</Link>
         </div>
       )}
-      <div className="flex text-right text-black m-3 mb-8">
+      <div className="flex text-right text-black m-3 mb-5">
         &copy; {new Date().getFullYear()} Holidaze.
       </div>
-      <div className="absolute right-4 flex space-x-5 pt-8">
-        <a href="https://www.facebook.com" className="text-black text-2xl mr-2">
+      <div className="flex space-x-5 pt-8 mb-5">
+        <a href="https://www.facebook.com" className="text-dark-blue text-2xl m-2">
           <FaFacebookSquare />
         </a>
-        <a href="https://www.instagram.com" className="text-black text-2xl mr-2">
+        <a href="https://www.instagram.com" className="text-dark-blue text-2xl m-2">
           <FaInstagramSquare />
         </a>
-        <a href="https://www.snapchat.com" className="text-black text-2xl mr-2">
+        <a href="https://www.snapchat.com" className="text-dark-blue text-2xl m-2">
           <FaSnapchatSquare />
         </a>
       </div>
