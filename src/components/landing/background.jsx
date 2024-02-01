@@ -4,7 +4,7 @@ import Background from "../../assets/traffic-road-sign.jpg";
 const ImageBack = ({ big = true }) => {
   const overlayClass = big
     ? "h-full w-full absolute inset-0 bg-black opacity-50"
-    : "h-16 w-full absolute inset-0 bg-black opacity-50"; // Juster høyde og gjennomsiktighet etter behov
+    : "h-16 w-full absolute inset-0 bg-black opacity-50"; 
 
   return (
     <div className="relative">

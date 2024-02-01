@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ALLVENUES_URL } from '../../constant/api';
 import { Link } from 'react-router-dom';
 import DefaultImage from '../../assets/Default.png';
+import VenueFilter from './VenueFilter';
 
 async function GetAllVenues() {
   const response = await fetch(ALLVENUES_URL);
@@ -28,6 +29,9 @@ function AllVenues() {
   return (
     <div className='mb-16 m-10'>
       <h1 className="text-3xl font-bold mb-6 text-dark-blue">Venues</h1>
+       <div className="mb-16">
+        <VenueFilter />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {venues?.map((venue) => {
           return (

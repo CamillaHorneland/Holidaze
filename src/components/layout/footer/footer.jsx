@@ -8,7 +8,7 @@ function Footer() {
   const isVenueManager = user && (user.isVenueManager || user.venueManager);
 
   return (
-    <div className="relative bottom-0 w-full bg-light-blue h-38 flex flex-col items-center justify-center p-4">
+    <div className="absolute min-w-full mt-auto bg-light-blue h-38 flex flex-col items-center justify-center p-4 z-10">
       <div className="text-black m-3 mb-4">
         <Link to="/contact">Contact us</Link>
       </div>
@@ -17,10 +17,10 @@ function Footer() {
           <Link to="/profile">Become a Venue Manager</Link>
         </div>
       )}
-      <div className="text-black m-3 mb-8">
+      <div className="flex text-right text-black m-3 mb-8">
         &copy; {new Date().getFullYear()} Holidaze.
       </div>
-      <div className="absolute bottom-1 right-4 flex space-x-5 pt-8">
+      <div className="absolute right-4 flex space-x-5 pt-8">
         <a href="https://www.facebook.com" className="text-black text-2xl mr-2">
           <FaFacebookSquare />
         </a>

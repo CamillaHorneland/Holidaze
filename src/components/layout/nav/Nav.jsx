@@ -36,6 +36,9 @@ const Nav = () => {
       
       <HiMenuAlt2 className="m-6 text-5xl cursor-pointer sm:hidden text-white" onClick={handleToggleMobileMenu} />
       <ul className={`${isMobileMenuOpen ? 'block' : 'hidden'} sm:flex sm:space-x-4 text-white ml-auto`}>
+         {isVenueManager && (
+              <VenueManagerLinks closeMobileMenu={() => setIsMobileMenuOpen(false)} />
+            )}
          <li className="m-4 group">
           <NavLink to="/" className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => setIsMobileMenuOpen(false)}>
             Home
@@ -100,9 +103,9 @@ const Nav = () => {
                 </button>
               )}
             </li>
-            {isVenueManager && (
+            {/* {isVenueManager && (
               <VenueManagerLinks closeMobileMenu={() => setIsMobileMenuOpen(false)} />
-            )}
+            )} */}
           </>
         )}
       </ul>
