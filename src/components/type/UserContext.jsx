@@ -1,23 +1,34 @@
-import React, { createContext, useContext } from 'react';
-import useUserStore from './UserStore';
+import React, { createContext, useContext, useState } from 'react';
+import { useUserActions } from './UserStore';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const { user, setUser } = useUserStore();
+  const { setUser: updateUser, clearUser, useUserStore } = useUserActions();
+  const [user, setUser] = useState(useUserStore.getState().user);
 
-  const updateUser = (newUser) => {
+  const updateUserContext = (newUser) => {
     setUser((prevUser) => ({ ...prevUser, ...newUser }));
   };
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser: updateUserContext, clearUser }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-export const useUser = () => useContext(UserContext);
+export const useUser = () => {
+  const context = useContext(UserContext);
+
+  if (!context) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+
+  console.log('User Context:', context); // Legg til denne linjen
+
+  return context;
+};
 
 
 

@@ -1,10 +1,16 @@
+import React from 'react';
+import GetProfile from '../components/profile/GetProfile';
+
 function ProfilePage() {
-	return (
-		<>
-			<h1>Test</h1>
-			
-		</>
-	);
+ 
+  return (
+    <>
+  
+      <GetProfile />
+     
+    </>
+  );
 }
 
 export default ProfilePage;
+

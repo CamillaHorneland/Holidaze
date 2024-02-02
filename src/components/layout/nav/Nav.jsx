@@ -83,9 +83,9 @@ const Nav = () => {
               </NavLink>
             </li>
             <li className="m-4 group">
-              <NavLink to="/profile" className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => {
+              <NavLink to={`/profile/${user.name}`} className="active mx-4 transition-all hover:text-lg font-bold" onClick={() => {
                 setIsMobileMenuOpen(false);
-                navigate('/profile', { replace: true });
+                navigate(`/profile/${user.name}`, { replace: true });
               }}>
                 Profile
               </NavLink>
