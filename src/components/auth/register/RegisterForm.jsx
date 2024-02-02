@@ -140,9 +140,6 @@ function RegisterForm() {
                     </button>
                </div>
 
-
-          
-
        </fieldset>
       </form>
     </div>

@@ -6,9 +6,11 @@ export const REGISTER_URL = `${BASE_URL}/auth/register`;
 
 export const ALLVENUES_URL = `${BASE_URL}/venues`;
 
-export const PROFILE_URL = `${BASE_URL}/profiles/<name>`;
+export const PROFILE_URL = `${BASE_URL}/profiles`;
 
-export const PROFILEUPDATEMEDIA_URL = `${BASE_URL}/profiles/<name>/media`;
+// export const PROFILE_URL = `${BASE_URL}/profiles/<name>`;
+
+// export const PROFILEUPDATEMEDIA_URL = `${BASE_URL}/profiles/<name>/media`;
 
 export const BOOKINGS_URL = `${BASE_URL}/profiles/<name>/bookings`;
 

@@ -1,5 +1,5 @@
 import {  Route, Routes } from "react-router-dom";
-import { UserProvider } from './components/type/UserContext';
+import { UserProvider, useUser } from './components/type/UserContext';
 import HomePage from "./pages/HomePage";
 import VenuesPage from "./pages/VenuesPage";
 import VenuesSpecificPage from "./pages/VenuesSpecificPage";
@@ -16,6 +16,10 @@ import VenueManagerDeleteEditPage from "./pages/VenueManagerDeleteEditPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/layout/Layout";
 
+function MyComponent() {
+  const { accessToken } = useUser();
+  console.log('AccessToken:', accessToken);
+}
 
 function App() {
     return (
@@ -29,7 +33,7 @@ function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="contact" element={<ContactPage />} />
-            <Route path="profile" element={<ProfilePage />} />
+            <Route  exact path="profile/:name" element={<ProfilePage />} />
             <Route path="booking" element={<BookingPage />} />
             <Route path="bookingsuccess" element={<BookingSuccessPage />} />
             <Route path="yourvenues" element={<YourVenuesPage />} />
