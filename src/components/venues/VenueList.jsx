@@ -22,9 +22,13 @@ function AllVenues() {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) {
+  return <div>Loading...</div>;
+}
 
-  if (error) return 'An error has occurred: ' + error.message;
+if (error) {
+  return <div>An error has occurred: {error.message || "Unknown error"}</div>;
+}
 
   return (
     <div className='mb-16 m-10'>

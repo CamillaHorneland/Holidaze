@@ -64,7 +64,7 @@ function LoginForm() {
    
    <div className="flex mt-8 m-4 items-center mb-16">
         <div className="hidden md:block">  
-              <img src={image} alt="Your alt text" className="mb-4 w-40"/> 
+              <img src={image} alt="Login sign" className="mb-4 w-70"/> 
         </div>
         <form className="w-full max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
             <fieldset className={`flex flex-col p-8 space-y-6 ${isLoading && "opacity-50"}`}>

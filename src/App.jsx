@@ -1,5 +1,5 @@
 import {  Route, Routes } from "react-router-dom";
-import { UserProvider, useUser } from './components/type/UserContext';
+import { UserProvider } from './components/type/UserContext';
 import HomePage from "./pages/HomePage";
 import VenuesPage from "./pages/VenuesPage";
 import VenuesSpecificPage from "./pages/VenuesSpecificPage";
@@ -7,8 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ContactPage from "./pages/ContactPage";
 import ProfilePage from "./pages/ProfilePage";
-import BookingPage from "./pages/BookingsPage";
-import BookingSuccessPage from "./pages/BookingSuccessPage";
+import BookingsPage from "./pages/BookingsPage";
 import YourVenuesPage from "./pages/YourVenuesPage";
 import VenueManagerSpecificPage from "./pages/VenueManagerSpecificPage";
 import AddVenuePage from "./pages/AddVenuePage";
@@ -16,10 +15,6 @@ import VenueManagerDeleteEditPage from "./pages/VenueManagerDeleteEditPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/layout/Layout";
 
-function MyComponent() {
-  const { accessToken } = useUser();
-  console.log('AccessToken:', accessToken);
-}
 
 function App() {
     return (
@@ -34,8 +29,7 @@ function App() {
             <Route path="register" element={<RegisterPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route  exact path="profile/:name" element={<ProfilePage />} />
-            <Route path="booking" element={<BookingPage />} />
-            <Route path="bookingsuccess" element={<BookingSuccessPage />} />
+            <Route path="bookings" element={<BookingsPage />} />
             <Route path="yourvenues" element={<YourVenuesPage />} />
             <Route path="venuemanagerspecific/:id" element={<VenueManagerSpecificPage />} />
             <Route path="addvenue" element={<AddVenuePage />} />

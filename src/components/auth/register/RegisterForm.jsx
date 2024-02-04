@@ -60,7 +60,7 @@ function RegisterForm() {
 
       setUser(json);
       console.log(json);
-      navigate("/");
+      navigate("/login");
 
     } catch (error) {
       setError(error.toString());
@@ -72,7 +72,7 @@ function RegisterForm() {
   return (
     <div className="flex mt-8 m-4 items-center mb-16">
       <div className="hidden md:block">
-        <img src={image} alt="Your alt text" className="mb-4 w-40" />
+        <img src={image} alt="Register sign" className="w-70" />
       </div>
       <form className="w-full max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <fieldset className={`flex flex-col p-8 space-y-6 ${isLoading && "opacity-50"}`}>
@@ -118,7 +118,7 @@ function RegisterForm() {
             </div>
             <div className="form-control flex flex-row items-center justify-center my-4">
                 <label htmlFor="venueManager" className="text-black mb-2 mr-4">
-                    <span>Venue Manager:</span>
+                    <span>Do you want to become a Venue Manager:</span>
                 </label>
                 <input className="p-4 bg-light-blue border border-blue rounded-md mb-2"
                      {...register("venueManager")}

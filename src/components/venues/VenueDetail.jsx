@@ -31,9 +31,14 @@ function VenueDetail() {
   const handleThumbnailClick = (index) => {
     setSelectedImageIndex(index);
   };
+  
+  if (isPending) {
+  return <div>Loading...</div>;
+}
 
-  if (isPending) return <div>Loading...</div>;
-  if (error) return 'An error has occurred: ' + error.message;
+if (error) {
+  return <div>An error has occurred: {error.message || "Unknown error"}</div>;
+}
 
  
 
