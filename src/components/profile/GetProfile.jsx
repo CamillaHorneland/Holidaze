@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PROFILE_URL } from '../../constant/api';
 import { useQuery } from '@tanstack/react-query';
@@ -38,13 +39,20 @@ async function GetProfile(name, user, includeBookings = false, includeVenues = f
 }
 
 function ProfileDetail() {
+  console.log('ProfileDetail component rendering...');
   const { name: profileName } = useParams();
   const { user, setUser } = useUser();
-  const { isFetching, isError, data } = useQuery({
+  console.log('User information:', user);
+  const { isFetching, isError, data, refetch } = useQuery({
     queryKey: ['data', profileName],
     queryFn: () => GetProfile(profileName, user, true, true),
     staleTime: 1000 * 60 * 5,
+    onSuccess: (newData) => {
+       refetch({ force: true });
+    },
   });
+
+  
 
   if (isFetching) {
     return <div>Loading...</div>;
@@ -71,7 +79,7 @@ function ProfileDetail() {
       <div className="mb-4 m-10">
         <h3 className="text-lg font-bold">Avatar</h3> 
          {avatar ? (
-        <img src={avatar} alt="User Avatar" className="w-40 h-40 rounded-full" />
+        <img src={avatar} alt="User Avatar" className="w-40 h-45 border-2" />
         ) : (
         <img src="/src/assets/defaultprofile.png" alt="Default Avatar" className="w-40 h-40 rounded-full" />
         )}
@@ -120,7 +128,7 @@ function ProfileDetail() {
   );
 }
 
-export default ProfileDetail;
+export default ProfileDetail; 
 
 
  

@@ -1,5 +1,5 @@
 import {  Route, Routes } from "react-router-dom";
-import { UserProvider, useUser } from './components/type/UserContext';
+import { UserProvider } from './components/type/UserContext';
 import HomePage from "./pages/HomePage";
 import VenuesPage from "./pages/VenuesPage";
 import VenuesSpecificPage from "./pages/VenuesSpecificPage";
@@ -15,10 +15,6 @@ import VenueManagerDeleteEditPage from "./pages/VenueManagerDeleteEditPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/layout/Layout";
 
-// function MyComponent() {
-//   const { accessToken } = useUser();
-//   console.log('AccessToken:', accessToken);
-// }
 
 function App() {
     return (
