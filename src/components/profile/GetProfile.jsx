@@ -71,37 +71,37 @@ function ProfileDetail() {
    return (
     <div>
       <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">Your Profile</h1>
-      <div className="mx-auto p-4 m-10 mb-16 p-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+      <div className="mx-auto my-auto p-4 m-10 mb-16 p-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
         {/* Avatar Section */}
         <div className="mb-4 m-10">
           {avatar ? (
-            <img src={avatar} alt="User Avatar" className="w-40 h-45 border-2" />
+            <img src={avatar} alt="User Avatar" className="object-scale-down h-60 w-96 border-2 mx-auto my-auto" />
           ) : (
-            <img src="/src/assets/defaultprofile.png" alt="Default Avatar" className="w-40 h-40 rounded-full" />
+            <img src="/src/assets/defaultprofile.png" alt="Default Avatar" className="object-scale-down h-60 w-96 border-2 mx-auto my-auto" />
           )}
           {setUser && <UpdateAvatarForm />}
         </div>
 
         {/* Name and Mail Section */}
-        <div className="mb-4 m-10">
+        <div className="m-10 border-2 bg-light-blue p-3">
           <h3 className="text-lg font-bold">Name:</h3> {name}
           <h3 className="text-lg font-bold">Mail:</h3> {email}
         </div>
 
         {/* UpdateProfileForm Section */}
-        <div className="mb-4 m-10">
+        <div className="mb-4 m-10 mx-auto my-auto">
           <UpdateProfileForm />
         </div>
 
         {/* Bookings Section */}
-        <div className="mb-4 m-10">
+        <div className="mb-4 m-10 mx-auto my-auto">
           {_count?.bookings === 0 ? (
-            <p>You don't have any bookings right now.</p>
+            <p className='m-5'>You don't have any bookings right now.</p>
           ) : (
             <>
-              <p>You have {_count?.bookings} booking{(_count?.bookings !== 1) && 's'}.</p>
+              <p className='m-4'>You have {_count?.bookings} booking{(_count?.bookings !== 1) && 's'}.</p>
               <Link to="/booking">
-                <button className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full mt-2">
+                <button className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full w-52">
                   Go to Bookings
                 </button>
               </Link>
