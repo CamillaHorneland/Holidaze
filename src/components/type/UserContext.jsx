@@ -7,8 +7,8 @@ export const UserProvider = ({ children }) => {
   const { setUser: setAccessToken, clearUser, useUserStore } = useUserActions();
   const [user, setUser] = useState(useUserStore.getState().user);
 
-  const updateAccessToken = (accessToken) => {
-    setUser((prevUser) => ({ ...prevUser, isLoggedIn: true }));
+  const updateAccessToken = (accessToken, isVenueManager = false) => {
+    setUser((prevUser) => ({ ...prevUser, isLoggedIn: true, isVenueManager }));
     setAccessToken(accessToken);
   };
 
