@@ -49,18 +49,22 @@ const UpdateAvatarForm = () => {
   };
 
   return (
-    <div>
-      <h2>Update Avatar</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Avatar URL:
-          <input type="text" className="border" value={avatarUrl} onChange={handleAvatarChange} />
-        </label>
-        <button type="submit" className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full ml-2">Update Avatar</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
-  );
+      <div className='text-center'>
+        <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <label>
+                <input 
+                  type="text" 
+                  className="mt-5 m-b-5 bg-light-blue p-2 h-10 border border-blue rounded-md" 
+                  value={avatarUrl} 
+                  onChange={handleAvatarChange} 
+                  placeholder="Avatar URL here" 
+                />
+            </label>
+            <button type="submit" className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full mt-5 w-full max-w-52">Update Avatar</button>
+        </form>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+       </div>
+    );
 };
 
 export default UpdateAvatarForm;

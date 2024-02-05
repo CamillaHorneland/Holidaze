@@ -14,7 +14,7 @@ const UpdateProfileForm = () => {
     queryKey: ['profileUpdate'],
     queryFn: () => fetchProfileData(), 
     onSuccess: () => {
-      // Optional: Handle success if needed
+     
     },
   });
 
@@ -41,11 +41,9 @@ const UpdateProfileForm = () => {
         throw new Error(updatedUser.message || 'Failed to update profile');
       }
 
-      // Manually update user with the new venueManager status
       setUser((prevUser) => ({ ...prevUser, venueManager: updatedUser.venueManager }));
       setError(null);
 
-      // Trigger a re-fetch to update the UI with the new data
       refetch();
     } catch (error) {
       setError(error.message || 'An error occurred while updating profile');
@@ -62,19 +60,18 @@ const UpdateProfileForm = () => {
             type="checkbox"
             checked={isVenueManager}
             onChange={handleVenueManagerChange}
+            className='m-5 w-6'
           />
         </label>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div className="mb-4 m-10">
-        {isVenueManager && ( // Hvis brukeren allerede er en venue manager
+        {isVenueManager && ( 
           <Link to="/yourvenues">
-            <button className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full ml-2">
+            <button className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full w-52">
               Go to Your Venues
             </button>
           </Link>
         )}
-      </div>
     </div>
   );
 };
