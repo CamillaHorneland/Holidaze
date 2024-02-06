@@ -12,9 +12,9 @@ function Footer() {
       <div className="text-black m-3 mb-4">
         <Link to="/contact">Contact us</Link>
       </div>
-      {!isVenueManager && user && user.isLoggedIn && (
+        {!isVenueManager && user && user.isLoggedIn && (
         <div className="text-black m-3 mb-8">
-          <Link to="/profile">Become a Venue Manager</Link>
+          <Link to={`/profile/${user.name}`}>Become a Venue Manager</Link>
         </div>
       )}
       <div className="flex text-right text-black m-3 mb-5">

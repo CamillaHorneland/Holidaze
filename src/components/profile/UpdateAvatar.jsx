@@ -30,8 +30,7 @@ const UpdateAvatarForm = () => {
 
       const response = await fetch(`${PROFILE_URL}/${user.name}/media`, options);
       const updatedUser = await response.json();
-      console.log('Avatar Update Response:', updatedUser);
-
+     
       if (!response.ok) {
         throw new Error(updatedUser.message || 'Failed to update avatar');
       }

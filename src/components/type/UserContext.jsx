@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useUserActions } from './UserStore';
 
 const UserContext = createContext();
@@ -12,12 +12,24 @@ export const UserProvider = ({ children }) => {
     setAccessToken(accessToken);
   };
 
+  useEffect(() => {
+  
+    const handleUserStateChange = () => {
+      setUser(useUserStore.getState().user);
+    };
+
+    const unsubscribe = useUserStore.subscribe(handleUserStateChange);
+
+    return () => unsubscribe();
+  }, []); 
+
   return (
     <UserContext.Provider value={{ user, setUser, updateAccessToken, clearUser }}>
       {children}
     </UserContext.Provider>
   );
 };
+
 
 export const useUser = () => {
   const context = useContext(UserContext);
@@ -28,6 +40,8 @@ export const useUser = () => {
 
   return context;
 }; 
+
+
 
 
 
