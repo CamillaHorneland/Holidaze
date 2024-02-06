@@ -41,13 +41,10 @@ async function GetProfile(name, user, includeBookings = false, includeVenues = f
 function ProfileDetail() {
   const { name: profileName } = useParams();
   const { user, setUser } = useUser();
-  const { isFetching, isError, data, refetch } = useQuery({
+  const { isFetching, isError, data } = useQuery({
     queryKey: ['data', profileName],
     queryFn: () => GetProfile(profileName, user, true, true),
     staleTime: 1000 * 60 * 5,
-    onSuccess: (newData) => {
-      refetch({ force: true });
-    },
   });
 
   if (isFetching) {
@@ -66,7 +63,7 @@ function ProfileDetail() {
     return <div>No data available for this profile.</div>;
   }
 
-  const { name, email, avatar, venueManager, _count } = data;
+  const { name, email, avatar, _count } = data;
 
    return (
     <div>
@@ -84,8 +81,8 @@ function ProfileDetail() {
 
         {/* Name and Mail Section */}
         <div className="m-10 border-2 bg-light-blue p-3">
-          <h3 className="text-lg font-bold">Name:</h3> {name}
-          <h3 className="text-lg font-bold">Mail:</h3> {email}
+          <h3 className="text-lg font-bold mb-5">Name:</h3> {name}
+          <h3 className="text-lg font-bold mt-5 mb-5">Mail:</h3> {email}
         </div>
 
         {/* UpdateProfileForm Section */}
