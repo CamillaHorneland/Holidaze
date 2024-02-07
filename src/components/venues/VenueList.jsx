@@ -83,4 +83,3 @@ if (error) {
 
 export default AllVenues;
 
-
