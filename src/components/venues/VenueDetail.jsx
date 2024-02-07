@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { MdPets, MdFreeBreakfast } from 'react-icons/md';
 import { FaParking, FaWifi } from 'react-icons/fa';
 import DefaultImage from '../../assets/Default.png';
+import HostDetail from './host/Host';
 
 async function getVenue(id) {
   const response = await fetch(`${ALLVENUES_URL}/${id}`);
@@ -48,7 +49,7 @@ if (error) {
         <>
           <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">{data.name}</h1>
 
-          <div className='sm:w-4/4 md:w-2/4 lg:w-2/4 lg:pr-4 m-10 mb-10 overflow-hidden'>
+          <div className='h-1/5 sm:w-4/4 md:w-3/4 lg:w-2/4 m-10 mb-10 overflow-hidden'>
             <img
               src={
                 selectedImageIndex !== null && data.media.length > 0
@@ -57,7 +58,7 @@ if (error) {
                  
               }
               alt={data.name}
-              className='w-full h-auto md:h-45 lg:h-30 object-over rounded-md'
+              className='rounded-md'
             />
 
             {data.media.length > 1 && (
@@ -74,13 +75,15 @@ if (error) {
             )}
           </div>
 
+
           <div className="mb-4 m-10">
             <h3 className="text-lg font-bold">Description:</h3> {data.description}
           </div>
 
+          <HostDetail />
+          
           <div className="mb-5 bg-light-blue m-10 p-5">
             <h3 className="text-lg font-bold mb-3">Location:</h3>
-
             {data.location.address && <p className="mb-2">Address: {data.location.address}</p>}
             {data.location.city && <p className="mb-2">City: {data.location.city}</p>}
             {data.location.country && <p className="mb-2">Country: {data.location.country}</p>}
