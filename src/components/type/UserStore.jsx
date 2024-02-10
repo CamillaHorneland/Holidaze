@@ -5,7 +5,9 @@ const useUserStore = create(
   persist(
     (set) => ({
       user: { role: 'guest', isVenueManager: false, isLoggedIn: false },
-      setUser: (user) => set(() => ({ user: { ...user, isLoggedIn: true } })),
+      setUser: (user) => set(() => {
+        return { user: { ...user, isLoggedIn: true } };
+      }),
       clearUser: () => set({ user: { role: 'guest', isVenueManager: false, isLoggedIn: false } }),
     }),
     {
@@ -13,6 +15,7 @@ const useUserStore = create(
     }
   )
 );
+
 
 export const useToken = () => useUserStore((state) => state.user?.accessToken);
 
