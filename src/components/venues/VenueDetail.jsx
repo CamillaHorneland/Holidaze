@@ -6,6 +6,7 @@ import { MdPets, MdFreeBreakfast } from 'react-icons/md';
 import { FaParking, FaWifi } from 'react-icons/fa';
 import DefaultImage from '../../assets/Default.png';
 import HostDetail from './host/Host';
+import BookingDetail from './book/CalenderVenue';
 
 async function getVenue(id) {
   const response = await fetch(`${ALLVENUES_URL}/${id}`);
@@ -127,6 +128,7 @@ if (error) {
               </li>
             </ul>
           </div>
+          <BookingDetail />
         </>
       )}
     </div>
