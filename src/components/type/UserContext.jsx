@@ -13,10 +13,10 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-  
-    const handleUserStateChange = () => {
-      setUser(useUserStore.getState().user);
-    };
+  const handleUserStateChange = () => {
+    const newUser = useUserStore.getState().user;
+    setUser(newUser);
+  };
 
     const unsubscribe = useUserStore.subscribe(handleUserStateChange);
 

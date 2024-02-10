@@ -128,7 +128,7 @@ if (error) {
               </li>
             </ul>
           </div>
-          <BookingDetail />
+          <BookingDetail venueId={id} />
         </>
       )}
     </div>

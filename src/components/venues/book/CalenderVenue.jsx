@@ -1,143 +1,144 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 import { ALLVENUES_URL } from '../../../constant/api';
 import { useQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addDays } from "date-fns";
+import nb from 'date-fns/locale/nb';
+import ConfirmationModal from './ConfirmationModal';
+import { useUser } from '../../type/UserContext';
 
-async function getVenue(id) {
-  const response = await fetch(`${ALLVENUES_URL}/${id}`);
+async function getBookingDetail(venueId) {
+  try {
+    const response = await fetch(`${ALLVENUES_URL}/${venueId}?_bookings=true`);
 
-  if (!response.ok) {
-    throw new Error('There was an error fetching the venue');
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Error parsing JSON response');
   }
-
-  return response.json();
 }
 
-async function getBookingDetail(id) {
-  const response = await fetch(`${ALLVENUES_URL}/${id}?_bookings=true`);
-
-  if (!response.ok) {
-    throw new Error('There was an error fetching booking details');
-  }
-
-  return response.json();
-}
-
-const BookingDetail = () => {
+const BookingDetail = ({ venueId }) => {
   const { id } = useParams();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
-
-
+  const [excludedDates, setExcludedDates] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { user } = useUser();
+ 
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
   };
 
-
   const { data: bookingData, isLoading: isBookingLoading, isError: isBookingError } = useQuery({
-    queryKey: ['booking', id],
-    queryFn: () => getBookingDetail(id),
+    queryKey: ['booking', venueId],
+    queryFn: () => getBookingDetail(venueId),
     staleTime: 1000 * 60 * 5,
   });
 
-  const isDateBooked = (date) => {
+  useEffect(() => {
     if (bookingData && bookingData.bookings) {
-      return bookingData.bookings.some((booking) => {
-        const bookingStartDate = new Date(booking.dateFrom);
-        const bookingEndDate = new Date(booking.dateTo);
-        return date >= bookingStartDate && date <= bookingEndDate;
-      });
-    }
-    return false;
-  };
+      const newExcludedDates = bookingData.bookings.map((booking) => ({
+        startDate: new Date(booking.dateFrom),
+        endDate: new Date(booking.dateTo),
+      }));
 
-  const handleBookingUpdate = async (startDate, endDate, guests) => {
-    try {
-      const response = await fetch(`${ALLVENUES_URL}/${id}/booking`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          startDate: startDate,
-          endDate: endDate,
-          guests: guests,
-        }),
+      const flattenedExcludedDates = newExcludedDates.flatMap(({ startDate, endDate }) => {
+        const dates = [];
+        let currentDate = new Date(startDate);
+
+        while (currentDate <= endDate) {
+          dates.push(new Date(currentDate));
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        return dates;
       });
 
-      if (!response.ok) {
-        throw new Error('There was an error updating the booking');
-      }
-
-      console.log('Booking updated successfully');
-    } catch (error) {
-      console.error('Error updating booking:', error.message || 'Unknown error');
+      setExcludedDates(flattenedExcludedDates);
     }
-  };
+  }, [bookingData]);
 
-  if (isBookingLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isBookingError) {
-    return <div>An error has occurred: {isBookingError.message || 'Unknown error'}</div>;
-  }
-  
   return (
     <>
-    {bookingData && (
-    <div className="bg-blue m-10 pb-20">
-      <h3 className="text-lg font-bold p-5">Book this venue:</h3>
-      <div className="flex flex-wrap p-4 space-between justify-center">
-
-        <div className="mb-4 sm:mb-0">
-          <DatePicker
-            id="startDate"
-            dateFormat="dd/MM/yyyy"
-            selected={startDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
-            selectsRange
-            monthsShown={2}
-            selectsDisabledDaysInRange
-            inline
-          />
+      {user && user.role === 'guest' ? (
+        <div className="bg-blue m-10 pb-20">
+          <h3 className="text-lg font-bold p-5">Book this venue:</h3>
+          <p className="text-white m-4">You have to login to book a venue. <NavLink to="/login" className="text-white font-bold ml-5">Login here.</NavLink></p>
         </div>
+      ) : (
+        bookingData && (
+          <div className="bg-blue m-10 pb-20">
+            <h3 className="text-lg font-bold p-5">Book this venue:</h3>
+            <div className="flex flex-wrap p-4 space-between justify-center">
+              <div className="mb-4 sm:mb-0">
+                <DatePicker
+                  id="startDate"
+                  dateFormat="dd/MM/yyyy"
+                  selected={startDate}
+                  onChange={onChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  excludeDates={excludedDates}
+                  selectsRange
+                  monthsShown={2}
+                  selectsDisabledDaysInRange
+                  minDate={new Date()}
+                  inline
+                  locale={nb}
+                />
+              </div>
+              <div className="mt-5 ml-10">
+                <label htmlFor="guests" className="block text-gray-700">
+                  Guests:
+                </label>
+                <input
+                  type="number"
+                  id="guests"
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                  min={1}
+                  max={bookingData.maxGuests}
+                  className="align-center p-2 block border border-gray-300 rounded-md"
+                />
+                <p className="text-light-blue m-4">(Max guest for this venue {bookingData.maxGuests})</p>
+                <button
+                  className="hover:bg-light-blue bg-blue border-2 border-light-blue m-2 text-black font-bold py-2 p-4 rounded-full w-full"
+                  onClick={() => setModalOpen(true)}
+                >
+                  Go to booking
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      )}
 
-        <div className="mt-5 ml-10">
-          <label htmlFor="guests" className="block text-gray-700">
-            Guests:
-          </label>
-          <input
-            type="number"
-            id="guests"
-            value={guests}
-            onChange={(e) => setGuests(e.target.value)}
-            min={1}
-            max={bookingData.maxGuests}
-            className=" align-center p-2 block border border-gray-300 rounded-md"
-          />
-          <p className="text-light-blue m-4">(Max guest for this venue {bookingData.maxGuests})</p>
-          <button
-            className="hover:bg-light-blue bg-blue border-2 border-light-blue m-2 text-black font-bold py-2 p-4 rounded-full w-full "
-            onClick={() => handleBookingUpdate(startDate, endDate, guests)}
-          >
-            Go to booking
-          </button>
-        </div>
-      </div>
-     </div>
-    )}
-   </>
+      {isModalOpen && (
+        <ConfirmationModal
+          startDate={startDate}
+          endDate={endDate}
+          guests={guests}
+          venueId={venueId}
+          onClose={() => setModalOpen(false)}
+          price={bookingData.price}
+        />
+      )}
+    </>
   );
 };
 
 export default BookingDetail;
+
+
+
+
+
