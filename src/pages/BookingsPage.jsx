@@ -1,7 +1,9 @@
+import BookingProfileDetail from "../components/profile/ProfilesBooking";
+
 function BookingPage() {
 	return (
 		<>
-			<h1>Test</h1>
+			<BookingProfileDetail />
 			
 		</>
 	);
