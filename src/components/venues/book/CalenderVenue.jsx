@@ -68,72 +68,72 @@ const BookingDetail = ({ venueId }) => {
   }, [bookingData]);
 
   return (
-    <>
-      {user && user.role === 'guest' ? (
-        <div className="bg-blue m-10 pb-20">
-          <h3 className="text-lg font-bold p-5">Book this venue:</h3>
-          <p className="text-white m-4">You have to login to book a venue. <NavLink to="/login" className="text-white font-bold ml-5">Login here.</NavLink></p>
-        </div>
-      ) : (
-        bookingData && (
-          <div className="bg-blue m-10 pb-20">
-            <h3 className="text-lg font-bold p-5">Book this venue:</h3>
-            <div className="flex flex-wrap p-4 space-between justify-center">
-              <div className="mb-4 sm:mb-0">
-                <DatePicker
-                  id="startDate"
-                  dateFormat="dd/MM/yyyy"
-                  selected={startDate}
-                  onChange={onChange}
-                  startDate={startDate}
-                  endDate={endDate}
-                  excludeDates={excludedDates}
-                  selectsRange
-                  monthsShown={2}
-                  selectsDisabledDaysInRange
-                  minDate={new Date()}
-                  inline
-                  locale={nb}
-                />
-              </div>
-              <div className="mt-5 ml-10">
-                <label htmlFor="guests" className="block text-gray-700">
-                  Guests:
-                </label>
-                <input
-                  type="number"
-                  id="guests"
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  min={1}
-                  max={bookingData.maxGuests}
-                  className="align-center p-2 block border border-gray-300 rounded-md"
-                />
-                <p className="text-light-blue m-4">(Max guest for this venue {bookingData.maxGuests})</p>
-                <button
-                  className="hover:bg-light-blue bg-blue border-2 border-light-blue m-2 text-black font-bold py-2 p-4 rounded-full w-full"
-                  onClick={() => setModalOpen(true)}
-                >
-                  Go to booking
-                </button>
-              </div>
-            </div>
+  <>
+    <div className="bg-blue m-10 pb-20">
+      <h3 className="text-lg font-bold p-5">Book this venue:</h3>
+      {bookingData && (
+        <div className="flex flex-wrap p-4 space-between justify-center">
+          <div className="mb-4 sm:mb-0">
+            <DatePicker
+              id="startDate"
+              dateFormat="dd/MM/yyyy"
+              selected={startDate}
+              onChange={onChange}
+              startDate={startDate}
+              endDate={endDate}
+              excludeDates={excludedDates}
+              selectsRange
+              monthsShown={2}
+              selectsDisabledDaysInRange
+              minDate={new Date()}
+              inline
+              locale={nb}
+            />
           </div>
-        )
+          <div className="mt-5 ml-10">
+            <label htmlFor="guests" className="block text-gray-700 sm:m-auto">
+              Guests:
+            </label>
+            <input
+              type="number"
+              id="guests"
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
+              min={1}
+              max={bookingData.maxGuests}
+              className="align-center p-2 block border border-gray-300 rounded-md sm:m-auto"
+            />
+            <p className="text-light-blue m-4 sm:text-center">(Max guest for this venue {bookingData.maxGuests})</p>
+            
+            {user && user.role === 'guest' ? (
+              <p className="text-white sm:text-center">
+                You have to login to book a venue. <NavLink to="/login" className="text-white font-bold m-3 sm:text-center">Login here.</NavLink>
+              </p>
+            ) : (
+              <button
+                className="hover:bg-light-blue bg-blue border-2 border-light-blue m-2 text-black font-bold py-2 p-4 rounded-full w-full"
+                onClick={() => setModalOpen(true)}
+              >
+                Go to booking
+              </button>
+            )}
+          </div>
+        </div>
       )}
+    </div>
 
-      {isModalOpen && (
-        <ConfirmationModal
-          startDate={startDate}
-          endDate={endDate}
-          guests={guests}
-          venueId={venueId}
-          onClose={() => setModalOpen(false)}
-          price={bookingData.price}
-        />
-      )}
-    </>
-  );
+    {isModalOpen && (
+      <ConfirmationModal
+        startDate={startDate}
+        endDate={endDate}
+        guests={guests}
+        venueId={venueId}
+        onClose={() => setModalOpen(false)}
+        price={bookingData.price}
+      />
+    )}
+  </>
+ );
 };
 
 export default BookingDetail;
