@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useUser } from '../type/UserContext';
 import { format, differenceInDays } from 'date-fns';
 import DefaultImage from '../../assets/Default.png';
+import DeleteButton from '../bookings/DeleteBooking';
 
 async function GetBookings(name, user) {
   try {
@@ -58,7 +59,7 @@ function BookingProfileDetail() {
   }
 
   if (!bookingsData || bookingsData.length === 0) {
-    return <div>No data available for this profile or no bookings.</div>;
+    return <div className='m-20 text-red-500'>No data available for this profile or no bookings.</div>;
   }
 
   return (
@@ -97,6 +98,16 @@ function BookingProfileDetail() {
             >
               View Venues
             </Link>
+             <DeleteButton
+                bookingId={booking.id}
+                onDelete={() => {
+                }}
+                user={user}
+                className="flex flex-end"
+              />
+              <p className="text-red-500 mt-2">
+                If you delete this booking later than 48 hours before the from date, you will still be charged for the booking.
+              </p>
           </div>
         </div>
       ))}
