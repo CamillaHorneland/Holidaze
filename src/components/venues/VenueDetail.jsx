@@ -7,6 +7,7 @@ import { FaParking, FaWifi } from 'react-icons/fa';
 import DefaultImage from '../../assets/Default.png';
 import HostDetail from './host/Host';
 import BookingDetail from './book/CalenderVenue';
+import useVenueStore from '../../hooks/VenueStore';
 
 async function getVenue(id) {
   const response = await fetch(`${ALLVENUES_URL}/${id}`);
@@ -42,7 +43,7 @@ if (error) {
   return <div>An error has occurred: {error.message || "Unknown error"}</div>;
 }
 
- 
+useVenueStore.setState({ venueData: data });
 
   return (
     <div className=" mx-auto p-4 m-10 mb-16 p-16">

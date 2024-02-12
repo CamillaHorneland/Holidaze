@@ -3,7 +3,7 @@ import { PROFILE_URL } from '../../constant/api';
 import { useQuery } from '@tanstack/react-query';
 import { useUser } from '../type/UserContext';
 import { format } from 'date-fns';
-;
+import useVenueStore from '../../hooks/VenueStore';
 
 async function GetBookings(name, user) {
   try {
@@ -78,10 +78,11 @@ function BookingProfileDetail() {
               <p className="font-bold mt-2">Booked:</p>
               <p>{format(new Date(booking.created), 'EEEE dd.MM.yyyy')}</p>
 
-              {/* <p className="font-bold mt-2">Venue Name:</p>
-              <p>{venueData.name}</p>
+               <p className="font-bold mt-2">Venue Name:</p>
+              <p>{useVenueStore.getState().venueData?.name}</p>
               <p className="font-bold mt-2">Venue Price:</p>
-              <p>{venueData.price}</p> */}
+              <p>{useVenueStore.getState().venueData?.price}</p>
+            
             </div>
           ))}
         </div>
