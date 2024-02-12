@@ -97,7 +97,7 @@ function ProfileDetail() {
           ) : (
             <>
               <p className='m-4'>You have {_count?.bookings} booking{(_count?.bookings !== 1) && 's'}.</p>
-              <Link to="/booking">
+               <Link to="/booking">
                 <button className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full w-52">
                   Go to Bookings
                 </button>
