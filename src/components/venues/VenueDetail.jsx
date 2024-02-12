@@ -136,3 +136,4 @@ if (error) {
 }
 
 export default VenueDetail;
+

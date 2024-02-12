@@ -41,7 +41,7 @@ function ConfirmationModal({ startDate, endDate, guests, venueId, onClose, price
   const [bookingErrorMessage, setBookingErrorMessage] = useState('');
 
   const { user } = useUser();
-
+  
   const formattedStartDate = format(new Date(startDate), 'EEEE dd.MM.yyyy');
   const formattedEndDate = format(new Date(endDate), 'EEEE dd.MM.yyyy');
   const numberOfNights = differenceInDays(new Date(endDate), new Date(startDate));
