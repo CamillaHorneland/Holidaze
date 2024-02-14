@@ -1,30 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ALLVENUES_URL } from '../../../constant/api';
-import { useQuery } from '@tanstack/react-query';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import nb from 'date-fns/locale/nb';
 import ConfirmationModal from './ConfirmationModal';
 import { useUser } from '../../type/UserContext';
+import { useFetch } from '../../../hooks/useFetch';
 
-async function getBookingDetail(venueId) {
-  try {
-    const response = await fetch(`${ALLVENUES_URL}/${venueId}?_bookings=true`);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error('Error parsing JSON response');
-  }
-}
 
 const BookingDetail = ({ venueId }) => {
-  const { id } = useParams();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState(1);
@@ -38,13 +23,12 @@ const BookingDetail = ({ venueId }) => {
     setEndDate(end);
   };
 
-  const { data: bookingData, isLoading: isBookingLoading, isError: isBookingError } = useQuery({
-    queryKey: ['booking', venueId],
-    queryFn: () => getBookingDetail(venueId),
-    staleTime: 1000 * 60 * 5,
-  });
+     const { data: bookingData, error, isLoading } = useFetch(`${ALLVENUES_URL}/${venueId}?_bookings=true`);
 
   useEffect(() => {
+      if (error) {
+      console.error("Error fetching data:", error);
+    }
     if (bookingData && bookingData.bookings) {
       const newExcludedDates = bookingData.bookings.map((booking) => ({
         startDate: new Date(booking.dateFrom),
@@ -65,7 +49,8 @@ const BookingDetail = ({ venueId }) => {
 
       setExcludedDates(flattenedExcludedDates);
     }
-  }, [bookingData]);
+
+    }, [bookingData, error]);
 
   return (
   <>

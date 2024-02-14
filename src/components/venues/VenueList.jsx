@@ -1,34 +1,20 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { ALLVENUES_URL } from '../../constant/api';
 import { Link } from 'react-router-dom';
 import DefaultImage from '../../assets/Default.png';
 import VenueFilter from './VenueFilter';
+import { useFetch } from '../../hooks/useFetch';
 
-async function GetAllVenues() {
-  const response = await fetch(ALLVENUES_URL);
+const AllVenues = () => {
+  const { data: venues, isLoading, error } = useFetch(ALLVENUES_URL, {}, [], 1000 * 60 * 5);
 
-  if (!response.ok) {
-    throw new Error('There was an error fetching the listings');
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  return response.json();
-}
-
-function AllVenues() {
-  const { isPending, error, data: venues, isFetching } = useQuery({
-    queryKey: ['venues'],
-    queryFn: GetAllVenues,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  if (isPending) {
-  return <div>Loading...</div>;
-}
-
-if (error) {
-  return <div>An error has occurred: {error.message || "Unknown error"}</div>;
-}
+  if (error) {
+    return <div>An error has occurred: {error.message || 'Unknown error'}</div>;
+  }
 
   return (
     <div className='mb-16 m-10'>

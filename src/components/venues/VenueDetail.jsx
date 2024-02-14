@@ -1,49 +1,33 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useFetch } from '../../hooks/useFetch';
 import { ALLVENUES_URL } from '../../constant/api';
-import { useQuery } from '@tanstack/react-query';
 import { MdPets, MdFreeBreakfast } from 'react-icons/md';
 import { FaParking, FaWifi } from 'react-icons/fa';
 import DefaultImage from '../../assets/Default.png';
 import HostDetail from './host/Host';
 import BookingDetail from './book/CalenderVenue';
 
-async function getVenue(id) {
-  const response = await fetch(`${ALLVENUES_URL}/${id}`);
-
-  if (!response.ok) {
-    throw new Error('There was an error fetching the venue');
-  }
-
-  return response.json();
-}
-
-function VenueDetail() {
+const VenueDetail = () => {
   const { id } = useParams();
-  const { isPending, error, data } = useQuery({
-    queryKey: ['venue', id],
-    queryFn: () => getVenue(id),
-    staleTime: 1000 * 60 * 5,
-  });
+  const { data, isLoading, error } = useFetch(`${ALLVENUES_URL}/${id}`, {}, [id], 1000 * 60 * 5);
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
- 
 
   const handleThumbnailClick = (index) => {
     setSelectedImageIndex(index);
   };
-  
-  if (isPending) {
-  return <div>Loading...</div>;
-}
 
-if (error) {
-  return <div>An error has occurred: {error.message || "Unknown error"}</div>;
-}
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>An error has occurred: {error.message || 'Unknown error'}</div>;
+  }
 
   return (
-    <div className=" mx-auto p-4 m-10 mb-16 p-16">
+    <div className="mx-auto p-4 m-10 mb-16 p-16">
       {data && (
         <>
           <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">{data.name}</h1>
@@ -54,7 +38,6 @@ if (error) {
                 selectedImageIndex !== null && data.media.length > 0
                   ? data.media[selectedImageIndex]
                   : DefaultImage
-                 
               }
               alt={data.name}
               className='rounded-md'
@@ -67,20 +50,19 @@ if (error) {
                     key={index}
                     onClick={() => handleThumbnailClick(index)}
                     className='w-2/4 cursor-pointer p-2'>
-                    <img src={image} alt={data.name}className='w-full h-auto object-cover rounded-md'/>
+                    <img src={image} alt={data.name} className='w-full h-auto object-cover rounded-md'/>
                   </div>
                 ))}
               </div>
             )}
           </div>
 
-
           <div className="mb-4 m-10">
             <h3 className="text-lg font-bold">Description:</h3> {data.description}
           </div>
 
           <HostDetail />
-          
+
           <div className="mb-5 bg-light-blue m-10 p-5">
             <h3 className="text-lg font-bold mb-3">Location:</h3>
             {data.location.address && <p className="mb-2">Address: {data.location.address}</p>}
@@ -134,4 +116,5 @@ if (error) {
 }
 
 export default VenueDetail;
+
 

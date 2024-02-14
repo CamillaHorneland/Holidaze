@@ -1,25 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Input } from 'react-daisyui';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useFetch } from '../../hooks/useFetch';
 import { ALLVENUES_URL } from '../../constant/api';
 
-async function getAllVenues() {
-  const response = await fetch(ALLVENUES_URL);
-
-  if (!response.ok) {
-    throw new Error('There was an error fetching the listings');
-  }
-
-  return response.json();
-}
 
 function VenueFilter() {
-  const { data: venues, isLoading, error } = useQuery({
-    queryKey: ['venues'],
-    queryFn: getAllVenues,
-    config: { staleTime: 1000 * 60 * 5 },
-  });
+  const { data: venues, isLoading, error } = useFetch(ALLVENUES_URL, {}, [], 1000 * 60 * 5);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [showResults, setShowResults] = useState(false);
@@ -56,7 +43,7 @@ function VenueFilter() {
           value={searchTerm}
           onChange={(event) => {
             setSearchTerm(event.target.value.trim());
-            setShowResults(!!event.target.value.trim()); 
+            setShowResults(!!event.target.value.trim());
           }}
           placeholder="Search in venues"
         />
@@ -84,6 +71,7 @@ function VenueFilter() {
 }
 
 export default VenueFilter;
+
 
 
 

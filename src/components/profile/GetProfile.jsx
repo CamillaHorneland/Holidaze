@@ -1,60 +1,32 @@
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PROFILE_URL } from '../../constant/api';
-import { useQuery } from '@tanstack/react-query';
 import { useUser } from '../type/UserContext';
 import UpdateAvatarForm from './UpdateAvatar';
 import UpdateProfileForm from './BeVenueManager';
-
-async function GetProfile(name, user, includeBookings = false, includeVenues = false) {
-  try {
-    const bookingsParam = includeBookings ? '_bookings=true' : '';
-    const venuesParam = includeVenues ? '_venues=true' : '';
-
-    const queryParams = [bookingsParam, venuesParam].filter(Boolean).join('&');
-
-    const url = `${PROFILE_URL}/${name}${queryParams ? `?${queryParams}` : ''}`;
-
-    if (!user?.accessToken) {
-      console.error('Access token is missing or invalid.');
-      throw new Error('Access token is missing or invalid.');
-    }
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    });
-
-    if (!response.ok) {
-      const json = await response.json();
-      const errorMessage = json.errors?.[0]?.message || `HTTP error! Status: ${response.status}`;
-      throw new Error(errorMessage);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error('Error in GetProfile:', error);
-    throw error;
-  }
-}
+import { useFetch } from '../../hooks/useFetch';
 
 function ProfileDetail() {
   const { name: profileName } = useParams();
   const { user, setUser } = useUser();
-  const { isFetching, isError, data } = useQuery({
-    queryKey: ['data', profileName],
-    queryFn: () => GetProfile(profileName, user, true, true),
-    staleTime: 1000 * 60 * 5,
-  });
+  const { data, isLoading, error } = useFetch(
+    `${PROFILE_URL}/${profileName}?_bookings=true&_venues=true`, 
+    {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    },
+    [profileName, user.accessToken]
+  );
 
-  if (isFetching) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (error) {
     return (
       <div>
-        <div>An error has occurred: {isError?.message || 'Unknown error'}</div>
+        <div>An error has occurred: {error?.message || 'Unknown error'}</div>
       </div>
     );
   }
@@ -97,7 +69,7 @@ function ProfileDetail() {
           ) : (
             <>
               <p className='m-4'>You have {_count?.bookings} booking{(_count?.bookings !== 1) && 's'}.</p>
-               <Link to="/booking">
+               <Link to="/bookings">
                 <button className="bg-blue hover:bg-dark-blue text-white font-bold py-2 px-4 rounded-full w-52">
                   Go to Bookings
                 </button>
