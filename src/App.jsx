@@ -1,5 +1,5 @@
 import {  Route, Routes } from "react-router-dom";
-import { UserProvider } from './components/type/UserContext';
+import { UserProvider } from './hooks/type/UserContext';
 import HomePage from "./pages/HomePage";
 import VenuesPage from "./pages/VenuesPage";
 import VenuesSpecificPage from "./pages/VenuesSpecificPage";

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useUser } from '../type/UserContext';
-import { useUserActions } from '../type/UserStore';
+import { useUser } from '../../hooks/type/UserContext';
 import { PROFILE_URL } from '../../constant/api';
 import { useQueryClient } from '@tanstack/react-query';  
 
 const UpdateAvatarForm = () => {
   const { user, setUser } = useUser();
-  const { clearUser } = useUserActions(); 
   const [avatarUrl, setAvatarUrl] = useState('');
   const [error, setError] = useState('');
   const queryClient = useQueryClient(); 
@@ -43,7 +41,6 @@ const UpdateAvatarForm = () => {
       queryClient.invalidateQueries(['data', user.name]);
     } catch (error) {
       setError(error.message || 'An error occurred while updating avatar');
-      clearUser();
     }
   };
 

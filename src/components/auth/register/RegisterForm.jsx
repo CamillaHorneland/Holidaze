@@ -8,7 +8,7 @@ import { REGISTER_URL } from "../../../constant/api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../../../assets/Registersign.png";
-import { useUserActions } from "../../type/UserStore";
+import { useUserActions } from "../../../hooks/type/UserStore";
 
 const schema = yup.object({
   name: yup

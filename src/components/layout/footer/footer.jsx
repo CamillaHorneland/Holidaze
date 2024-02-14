@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebookSquare, FaInstagramSquare, FaSnapchatSquare } from "react-icons/fa";
-import { useUser } from "../../type/UserContext";
+import { useUser } from "../../../hooks/type/UserContext";
 
 function Footer() {
   const { user } = useUser();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useUser } from '../type/UserContext';
-import { useUserActions } from '../type/UserStore';
+import { useUser } from '../../hooks/type/UserContext';
+import { useUserActions } from '../../hooks/type/UserStore';
 import { PROFILE_URL } from '../../constant/api';
 import { useQuery } from '@tanstack/react-query';
 

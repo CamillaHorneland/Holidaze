@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { format, differenceInDays } from 'date-fns';
 import { NEWBOOKING_URL } from '../../../constant/api';
-import { useUser } from '../../type/UserContext';
+import { useUser } from '../../../hooks/type/UserContext';
 import { NavLink } from 'react-router-dom';
 
 async function createBooking({ dateFrom, dateTo, guests, venueId, user }) {
