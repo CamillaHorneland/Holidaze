@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import nb from 'date-fns/locale/nb';
 import ConfirmationModal from './ConfirmationModal';
-import { useUser } from '../../type/UserContext';
+import { useUser } from '../../../hooks/type/UserContext';
 import { useFetch } from '../../../hooks/useFetch';
 
 
@@ -79,15 +79,18 @@ const BookingDetail = ({ venueId }) => {
             <label htmlFor="guests" className="block text-gray-700 sm:m-auto">
               Guests:
             </label>
-            <input
-              type="number"
-              id="guests"
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              min={1}
-              max={bookingData.maxGuests}
-              className="align-center p-2 block border border-gray-300 rounded-md sm:m-auto"
-            />
+            <select
+                id="guests"
+                value={guests}
+                onChange={(e) => setGuests(parseInt(e.target.value, 10))}
+                className="p-4 bg-light-blue border border-blue rounded-md w-24"
+            >
+              {Array.from({ length: bookingData.maxGuests }, (_, i) => i + 1).map((option) => (
+              <option key={option} value={option}>
+                {option}
+                </option>
+              ))}
+            </select>
             <p className="text-light-blue m-4 sm:text-center">(Max guest for this venue {bookingData.maxGuests})</p>
             
             {user && user.role === 'guest' ? (

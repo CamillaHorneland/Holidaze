@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PROFILE_URL } from '../../constant/api';
-import { useUser } from '../type/UserContext';
+import { useUser } from '../../hooks/type/UserContext';
 import UpdateAvatarForm from './UpdateAvatar';
 import UpdateProfileForm from './BeVenueManager';
 import { useFetch } from '../../hooks/useFetch';

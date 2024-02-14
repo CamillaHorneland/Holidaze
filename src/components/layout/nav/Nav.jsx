@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { HiMenuAlt2 } from 'react-icons/hi';
-import { useUser } from '../../type/UserContext'; 
-import { useUserActions } from '../../type/UserStore'; 
+import { useUser } from '../../../hooks/type/UserContext'; 
+import { useUserActions } from '../../../hooks/type/UserStore'; 
 import VenueManagerLinks from './VenueManagerLinks'; 
 
 const Nav = () => {
