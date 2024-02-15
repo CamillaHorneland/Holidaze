@@ -11,7 +11,6 @@ import BookingsPage from "./pages/BookingsPage";
 import YourVenuesPage from "./pages/YourVenuesPage";
 import VenueManagerSpecificPage from "./pages/VenueManagerSpecificPage";
 import AddVenuePage from "./pages/AddVenuePage";
-import VenueManagerDeleteEditPage from "./pages/VenueManagerDeleteEditPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/layout/Layout";
 
@@ -33,7 +32,6 @@ function App() {
             <Route path="yourvenues" element={<YourVenuesPage />} />
             <Route path="venuemanagerspecific/:id" element={<VenueManagerSpecificPage />} />
             <Route path="addvenue" element={<AddVenuePage />} />
-            <Route path="venuemanageredit" element={<VenueManagerDeleteEditPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
