@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { PROFILE_URL } from '../../constant/api';
-import { useUser } from '../../hooks/type/UserContext';
+import { PROFILE_URL } from '../../../constant/api';
+import { useUser } from '../../../hooks/type/UserContext';
 import UpdateAvatarForm from './UpdateAvatar';
-import UpdateProfileForm from './BeVenueManager';
-import { useFetch } from '../../hooks/useFetch';
+import UpdateProfileForm from './BeVenuemanager';
+import { useFetch } from '../../../hooks/useFetch';
 
 function ProfileDetail() {
   const { name: profileName } = useParams();

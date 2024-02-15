@@ -1,5 +1,5 @@
 import React from 'react';
-import GetProfile from '../components/profile/GetProfile';
+import GetProfile from '../components/profile/logedinUser/GetProfile';
 
 function ProfilePage() {
  

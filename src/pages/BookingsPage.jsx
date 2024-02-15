@@ -1,4 +1,4 @@
-import BookingProfileDetail from "../components/profile/ProfilesBooking";
+import BookingProfileDetail from "../components/profile/logedinUser/ProfilesBooking";
 
 function BookingPage() {
 	return (

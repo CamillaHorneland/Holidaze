@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useUser } from '../../hooks/type/UserContext';
-import { PROFILE_URL } from '../../constant/api';
+import { useUser } from '../../../hooks/type/UserContext';
+import { PROFILE_URL } from '../../../constant/api';
 import { useQueryClient } from '@tanstack/react-query';  
 
 const UpdateAvatarForm = () => {

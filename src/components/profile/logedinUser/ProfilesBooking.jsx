@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PROFILE_URL } from '../../constant/api';
-import { useUser } from '../../hooks/type/UserContext';
+import { PROFILE_URL } from '../../../constant/api';
+import { useUser } from '../../../hooks/type/UserContext';
 import { format, differenceInDays } from 'date-fns';
-import DefaultImage from '../../assets/Default.png';
-import DeleteButton from '../bookings/DeleteBooking';
-import { useFetch } from '../../hooks/useFetch';
+import DefaultImage from '../../../assets/Default.png';
+import DeleteButton from '../../bookings/DeleteBooking';
+import { useFetch } from '../../../hooks/useFetch';
 
 function BookingProfileDetail() {
   const { user, setUser } = useUser();
