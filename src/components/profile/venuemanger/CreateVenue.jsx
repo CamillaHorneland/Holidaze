@@ -48,11 +48,16 @@ function AddVenueForm() {
   }
 
   return (
-    <div className="flex mt-8 m-4 items-center mb-16">
-      <div className="hidden md:block">
-        <img src={image} alt="Addvenue sign" className="w-70" />
-      </div>
-      <VenueForm onSubmit={onSubmit} isLoading={isLoading} error={error} />
+    <div className="m-10">
+        <h1 className="font-bold text-3xl mb-16 text-dark-blue">Add Venue:</h1>
+        <div className="flex m-10 mb-16">
+            <div className="hidden md:block">
+                <img src={image} alt="Addvenue sign" className="max:w-56" />
+            </div>
+            <div className="w-full max-w-md mx-auto">
+                <VenueForm onSubmit={onSubmit} isLoading={isLoading} error={error} />
+            </div>
+        </div>
     </div>
   );
 }

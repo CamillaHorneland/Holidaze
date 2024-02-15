@@ -60,61 +60,60 @@ function LoginForm() {
     }
   }
 
-   return (
-   
-   <div className="flex mt-8 m-4 items-center mb-16">
-        <div className="hidden md:block">  
-              <img src={image} alt="Login sign" className="mb-4 w-70"/> 
+    return (
+    <div className="m-10">
+      <h1 className="font-bold text-3xl text-dark-blue">Login:</h1>
+      <div className="flex mt-8 m-4 mb-16">
+        <div className="hidden md:block">
+          <img src={image} alt="Login sign" className="max:w-56"/>
         </div>
         <form className="w-full max-w-md mx-auto" onSubmit={handleSubmit(onSubmit)}>
-            <fieldset className={`flex flex-col p-8 space-y-6 ${isLoading && "opacity-50"}`}>
-                {error && <ServerWarning>{error}</ServerWarning>}
-                <div className="form-control flex flex-col my-4">
-                    <label htmlFor="email" className="text-black mb-2">
-                        <span>Email</span>
-                    </label>
-                    
-                    <input
-                       className="p-4 bg-light-blue border border-blue rounded-md"
-                       {...register("email")}
-                       id="email"
-                    />
-                    {errors.email && (
-                    <ValidationMessage>{errors.email.message}</ValidationMessage>
-                    )}
-               </div>
+          <fieldset className={`flex flex-col p-8 space-y-6 ${isLoading && "opacity-50"}`}>
+            {error && <ServerWarning>{error}</ServerWarning>}
+            <div className="form-control flex flex-col my-4">
+              <label htmlFor="email" className="text-black mb-2">
+                <span>Email</span>
+              </label>
+              <input
+                className="p-4 bg-light-blue border border-blue rounded-md"
+                {...register("email")}
+                id="email"
+              />
+              {errors.email && <ValidationMessage>{errors.email.message}</ValidationMessage>}
+            </div>
 
-               <div className="form-control flex flex-col my-4">
-                    <label htmlFor="password" className="text-black mb-2">
-                        <span>Password</span>
-                    </label>
-                    
-                    <input
-                        className="p-4 bg-light-blue border border-blue rounded-md"
-                        {...register("password")}
-                        type="password"
-                        id="password"
-                    />
-                    {errors.password && (
-                    <ValidationMessage>{errors.password.message}</ValidationMessage>
-                    )}
-               </div>
+            <div className="form-control flex flex-col my-4">
+              <label htmlFor="password" className="text-black mb-2">
+                <span>Password</span>
+              </label>
+              <input
+                className="p-4 bg-light-blue border border-blue rounded-md"
+                {...register("password")}
+                type="password"
+                id="password"
+              />
+              {errors.password && <ValidationMessage>{errors.password.message}</ValidationMessage>}
+            </div>
 
-               <div className="text-black flex justify-center mt-6">
-                    Not signed up?{" "}
-                    <Link to="/register" className="text-blue ml-2">
-                        Register here
-                   </Link>
-               </div>
+            <div className="text-black flex justify-center mt-6">
+              Not signed up?{" "}
+              <Link to="/register" className="text-blue ml-2">
+                Register here
+              </Link>
+            </div>
 
-               <div className="form-control my-6">
-                    <button className="bg-blue hover:bg-dark-blue text-white font-bold py-3 px-6 rounded-full" type="submit">
-                          {isLoading ? "Logging in..." : "Login"}
-                    </button>
-               </div>
-           </fieldset>
-       </form>
-  </div>
+            <div className="form-control my-6">
+              <button
+                className="bg-blue hover:bg-dark-blue text-white font-bold py-3 px-6 rounded-full"
+                type="submit"
+              >
+                {isLoading ? "Logging in..." : "Login"}
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
   );
 }
 
