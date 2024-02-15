@@ -1,7 +1,9 @@
+import YourVenues from "../components/profile/venuemanger/YourVenues";
+
 function YourVenuesPage() {
 	return (
 		<>
-			<h1>Test</h1>
+			<YourVenues />
 			
 		</>
 	);
