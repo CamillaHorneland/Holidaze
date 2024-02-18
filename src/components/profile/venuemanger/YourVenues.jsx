@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { PROFILE_URL } from '../../../constant/api';
+import { PROFILE_URL, ALLVENUES_URL } from '../../../constant/api';
 import { useUser } from '../../../hooks/type/UserContext';
 import { useFetch } from '../../../hooks/useFetch';
 import { format } from 'date-fns';
 import DefaultImage from '../../../assets/Default.png';
+import DeleteButton from '../../delete/Delete';
 
 function YourVenues() {
   const { name: profileName } = useParams();
@@ -67,12 +68,25 @@ function YourVenues() {
               >
                 View Venue
               </Link>
-              <Link
-                to={`/edityourvenue/${venue.id}`} 
-                className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
-              >
-               Edit Venue
-              </Link>
+              <div className='flex'>
+                <div className="flex-1 m-2">
+                  <Link
+                    to={`/edityourvenue/${venue.id}`} 
+                    className="block bg-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-blue w-full"
+                  >
+                    Edit Venue
+                  </Link>
+                </div>
+                <div className="flex-1 m-2">
+                  <DeleteButton
+                    onDelete={() => {}}
+                    user={user}
+                    apiEndpoint={`${ALLVENUES_URL}/${venue.id}`}  
+                    invalidationKey={['data']}
+                  />
+                </div>
+              </div>
+          
             </div>
 
           </div>

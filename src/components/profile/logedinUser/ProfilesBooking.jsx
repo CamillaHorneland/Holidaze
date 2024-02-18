@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PROFILE_URL } from '../../../constant/api';
+import { NEWBOOKING_URL, PROFILE_URL } from '../../../constant/api';
 import { useUser } from '../../../hooks/type/UserContext';
 import { format, differenceInDays } from 'date-fns';
 import DefaultImage from '../../../assets/Default.png';
-import DeleteButton from '../../delete/DeleteBooking';
+import DeleteButton from '../../delete/Delete';
 import { useFetch } from '../../../hooks/useFetch';
 
 function BookingProfileDetail() {
@@ -71,17 +71,17 @@ const { data: bookingsData, isLoading, error } = useFetch(
               </div>
               <Link
                 to={`/venuesspecific/${booking.venue.id}`}
-                className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
+                className="block bg-dark-blue mb-5 text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
               >
                 View Venues
               </Link>
-               <DeleteButton
-                  bookingId={booking.id}
-                  onDelete={() => {
-                  }}
-                  user={user}
-                  className="flex flex-end"
-                />
+              <DeleteButton
+                 onDelete={() => {
+                 }}
+                 user={user}
+                 apiEndpoint={`${NEWBOOKING_URL}/${booking.id}`}  
+                 invalidationKey={['data']}
+              />
                 <p className="text-red-500 mt-2">
                   If you delete this booking later than 48 hours before the from date, you will still be charged for the booking.
                 </p>
