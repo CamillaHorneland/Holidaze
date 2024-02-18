@@ -28,7 +28,7 @@ const DeleteButton = ({ itemId, onDelete, apiEndpoint, user, label = 'Delete', i
   return (
     <button
       onClick={handleDelete}
-      className={`bg-red-500 text-white p-2 rounded-md hover:bg-white hover:text-red-500 m-5 ${isDeleting && 'opacity-50'}`}
+      className={`bg-red-500 text-white p-2 rounded-md hover:bg-white border border-red-500 hover:text-red-500 w-full  ${isDeleting && 'opacity-50'}`}
       disabled={isDeleting}>
       {isDeleting ? 'Deleting...' : label}
     </button>

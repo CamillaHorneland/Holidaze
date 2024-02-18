@@ -71,7 +71,7 @@ const { data: bookingsData, isLoading, error } = useFetch(
               </div>
               <Link
                 to={`/venuesspecific/${booking.venue.id}`}
-                className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
+                className="block bg-dark-blue mb-5 text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
               >
                 View Venues
               </Link>

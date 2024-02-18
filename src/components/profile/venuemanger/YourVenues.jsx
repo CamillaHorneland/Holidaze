@@ -69,25 +69,24 @@ function YourVenues() {
                 View Venue
               </Link>
               <div className='flex'>
-                <div className="flex-1">
+                <div className="flex-1 m-2">
                   <Link
                     to={`/edityourvenue/${venue.id}`} 
-                    className="block bg-dark-blue text-center text-white m-5 p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue "
+                    className="block bg-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-blue w-full"
                   >
                     Edit Venue
                   </Link>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 m-2">
                   <DeleteButton
                     onDelete={() => {}}
                     user={user}
                     apiEndpoint={`${ALLVENUES_URL}/${venue.id}`}  
                     invalidationKey={['data']}
-                    className="flex p-2 w-full border"
                   />
                 </div>
               </div>
-
+          
             </div>
 
           </div>
