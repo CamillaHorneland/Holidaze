@@ -63,11 +63,18 @@ function YourVenues() {
               </div>
               <Link
                 to={`/venuesspecific/${venue.id}`}
-                className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
+                className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue mb-2"
               >
                 View Venue
               </Link>
+              <Link
+                to={`/edityourvenue/${venue.id}`} 
+                className="block bg-dark-blue text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
+              >
+               Edit Venue
+              </Link>
             </div>
+
           </div>
         ))}
       </div>
