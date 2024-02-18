@@ -4,7 +4,7 @@ import { PROFILE_URL } from '../../../constant/api';
 import { useUser } from '../../../hooks/type/UserContext';
 import { format, differenceInDays } from 'date-fns';
 import DefaultImage from '../../../assets/Default.png';
-import DeleteButton from '../../bookings/DeleteBooking';
+import DeleteButton from '../../delete/DeleteBooking';
 import { useFetch } from '../../../hooks/useFetch';
 
 function BookingProfileDetail() {
