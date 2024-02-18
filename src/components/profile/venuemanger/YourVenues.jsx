@@ -11,7 +11,7 @@ function YourVenues() {
   const { name: profileName } = useParams();
   const { user, setUser } = useUser();
   const { data: venuesData, isLoading, error } = useFetch(
-    `${PROFILE_URL}/${user.name}/venues`,
+    `${PROFILE_URL}/${user.name}/venues?_bookings=true`,
     {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
@@ -35,13 +35,15 @@ function YourVenues() {
   if (!venuesData) {
     return <div>No venues available for this profile.</div>;
   }
-
+ 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">Your Venues</h1>
-      <div className="mx-auto my-auto p-4 m-10 mb-16 p-16">
-        {venuesData.map((venue) => (
-          <div key={venue.id} className="flex flex-col bg-light-blue p-4 mb-4 rounded-md md:flex-row">
+  <div>
+    <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">Your Venues</h1>
+    <div className="mx-auto my-auto p-4 m-10 mb-16 p-16">
+
+      {venuesData.map((venue) => (
+        <div key={venue.id} className="bg-light-blue p-4 mb-4 rounded-md">
+          <div className="flex flex-col md:flex-row"> 
             <div className="flex-1">
               <h2 className='text-2xl font-bold mt-8 mb-8'>{venue.name}</h2>
               <p className="font-bold">Description:</p>
@@ -86,14 +88,33 @@ function YourVenues() {
                   />
                 </div>
               </div>
-          
             </div>
-
           </div>
-        ))}
-      </div>
+
+          {venue.bookings && venue.bookings.length > 0 ? (
+            <div className="mt-4">
+              <h3 className="text-lg font-bold">Bookings:</h3>
+              <ul>
+                {venue.bookings.map((booking) => (
+                  <li key={booking.id} className='m-5 mb-8'>
+                    <p>Date From: {format(new Date(booking.dateFrom), 'EEEE dd.MM.yyyy')}</p>
+                    <p>Date To: {format(new Date(booking.dateTo), 'EEEE dd.MM.yyyy')}</p>
+                    <p>Guests: {booking.guests}</p>
+                    <p>Created: {format(new Date(booking.created), 'EEEE dd.MM.yyyy')}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p className="m-8">There are no bookings on this venue at this time.</p>
+          )}
+          
+        </div>
+      ))}
     </div>
-  );
+  </div>
+ );
 }
 
 export default YourVenues;
+
