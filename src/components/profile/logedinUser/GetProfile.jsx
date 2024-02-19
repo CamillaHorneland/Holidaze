@@ -10,6 +10,7 @@ function ProfileDetail() {
   const { name: profileName } = useParams();
   const { user, setUser } = useUser();
   const { data, isLoading, error } = useFetch(
+    
     `${PROFILE_URL}/${profileName}?_bookings=true&_venues=true`, 
     {
       headers: {
@@ -19,11 +20,12 @@ function ProfileDetail() {
     [profileName, user.accessToken]
   );
 
-  if (isLoading) {
+    if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
+    console.error('An error occurred:', error);
     return (
       <div>
         <div>An error has occurred: {error?.message || 'Unknown error'}</div>
@@ -32,7 +34,7 @@ function ProfileDetail() {
   }
 
   if (!data) {
-    return <div>No data available for this profile.</div>;
+    return <div><h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">No data available for this profile.</h1></div>;
   }
 
   const { name, email, avatar, _count } = data;
@@ -57,7 +59,7 @@ function ProfileDetail() {
           <h3 className="text-lg font-bold mt-5 mb-5">Mail:</h3> {email}
         </div>
 
-        {/* UpdateProfileForm Section */}
+        {/* UpdateProfileFormVenueManager Section */}
         <div className="mb-4 m-10 mx-auto my-auto">
           <UpdateProfileForm />
         </div>

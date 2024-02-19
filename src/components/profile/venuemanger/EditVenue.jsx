@@ -24,13 +24,13 @@ function EditVenueForm() {
   );
 
    const queryClient = useQueryClient();
-   
+
    async function onSubmit(data) {
     const formattedData = {
         ...data,
         media: Array.isArray(data.media) ? data.media : (typeof data.media === 'string' ? data.media.split(',').map(url => url.trim()) : []),
     };
-    
+   
     try {
         setIsLoading(true);
         setError(null);
