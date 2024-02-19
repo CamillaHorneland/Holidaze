@@ -35,8 +35,8 @@ const Nav = () => {
   return (
     <nav className="sm:flex sm:items-center sm:justify-between bg-blue p-4">
       
-      <HiMenuAlt2 className="m-6 text-5xl cursor-pointer sm:hidden text-white" onClick={handleToggleMobileMenu} />
-      <ul className={`${isMobileMenuOpen ? 'block' : 'hidden'} sm:flex sm:space-x-4 text-white ml-auto`}>
+      <HiMenuAlt2 className="text-5xl cursor-pointer sm:hidden text-white" onClick={handleToggleMobileMenu} />
+      <ul className={`${isMobileMenuOpen ? 'block' : 'hidden'} sm:flex sm:space-x-4 text-white ml-auto mr-4`}>
          {isVenueManager && (
               <VenueManagerLinks closeMobileMenu={() => setIsMobileMenuOpen(false)} />
             )}
