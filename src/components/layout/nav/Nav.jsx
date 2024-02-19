@@ -9,7 +9,7 @@ const Nav = () => {
   const [isLogoutConfirmed, setIsLogoutConfirmed] = useState(false);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const { clearUser } = useUserActions();
  
   const handleToggleMobileMenu = () => {

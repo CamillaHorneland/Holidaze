@@ -12,40 +12,42 @@ function AddVenueForm() {
   const { user } = useUser();
 
   async function onSubmit(data) {
-    const formattedData = {
-      ...data,
-      media: typeof data.media === 'string' ? data.media.split(',').map(url => url.trim()) : data.media,
-    };
+  const formattedData = {
+    ...data,
+    media: typeof data.media === 'string' ? data.media.split(',').map(url => url.trim()) : data.media,
+  };
 
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${user.accessToken}`,
-    };
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${user.accessToken}`,
+  };
 
-    const options = {
-      headers: headers,
-      method: 'POST',
-      body: JSON.stringify(formattedData),
-    };
+  const options = {
+    headers: headers,
+    method: 'POST',
+    body: JSON.stringify(formattedData),
+  };
 
-    try {
-      setIsLoading(true);
-      setError(null);
-      const response = await fetch(ALLVENUES_URL, options);
-      const json = await response.json();
+  try {
+    setIsLoading(true);
+    setError(null);
 
-      if (!response.ok) {
-        throw new Error(json.errors?.[0]?.message ?? 'There was an error');
-      }
+    const response = await fetch(ALLVENUES_URL, options);
 
-      console.log(json);
-      navigate('/yourvenues');
-    } catch (error) {
-      setError(error.toString());
-    } finally {
-      setIsLoading(false);
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.errors?.[0]?.message || 'There was an error');
     }
+
+    const json = await response.json();
+    console.log(json);
+    navigate('/yourvenues');
+  } catch (error) {
+    setError(error.toString());
+  } finally {
+    setIsLoading(false);
   }
+}
 
   return (
     <div className="m-10">

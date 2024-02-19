@@ -8,7 +8,7 @@ import DeleteButton from '../../delete/Delete';
 import { useFetch } from '../../../hooks/useFetch';
 
 function BookingProfileDetail() {
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 const { data: bookingsData, isLoading, error } = useFetch(
   `${PROFILE_URL}/${user.name}/bookings?_venue=true`,
   {
@@ -36,7 +36,7 @@ const { data: bookingsData, isLoading, error } = useFetch(
   }
 
   if (!bookingsData || bookingsData.length === 0) {
-    return <div className='m-20 text-red-500'>No data available for this profile or no bookings.</div>;
+    return <div><h1 className="text-2xl font-bold text-dark-blue m-10 mb-10"> No data available for this profile or no bookings.</h1></div>;
   }
 
   return (
