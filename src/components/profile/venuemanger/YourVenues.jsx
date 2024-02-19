@@ -32,9 +32,10 @@ function YourVenues() {
     );
   }
 
-  if (!venuesData) {
+   if (!venuesData || venuesData.length === 0) {
     return <div><h1 className="text-2xl font-bold text-dark-blue m-10 mb-10">No venues available for this profile.</h1></div>;
   }
+
  
   return (
   <div>
