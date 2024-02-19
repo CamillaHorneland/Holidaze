@@ -88,6 +88,9 @@ function RegisterForm() {
                 id="name"
               />
               {errors.name && <ValidationMessage>{errors.name.message}</ValidationMessage>}
+              <p className="text-gray-500 text-sm mt-2">
+                Username can only contain letters, numbers, and underscores
+              </p>
             </div>
             <div className="form-control flex flex-col my-4">
               <label htmlFor="email" className="text-black mb-2">
@@ -99,6 +102,9 @@ function RegisterForm() {
                 id="email"
               />
               {errors.email && <ValidationMessage>{errors.email.message}</ValidationMessage>}
+               <p className="text-gray-500 text-sm mt-2">
+                  Must be a valid stud.noroff.no or noroff.no email address
+               </p>
             </div>
             <div className="form-control flex flex-col my-4">
               <label htmlFor="password" className="text-black mb-2">
@@ -111,6 +117,9 @@ function RegisterForm() {
                 id="password"
               />
               {errors.password && <ValidationMessage>{errors.password.message}</ValidationMessage>}
+               <p className="text-gray-500 text-sm mt-2">
+                  Password must be at least 8 characters
+               </p>
             </div>
             <div className="form-control flex flex-col my-4">
               <label htmlFor="avatar" className="text-black mb-2">
@@ -122,6 +131,9 @@ function RegisterForm() {
                 id="avatar"
               />
               {errors.avatar && <ValidationMessage>{errors.avatar.message}</ValidationMessage>}
+               <p className="text-gray-500 text-sm mt-2">
+                  Enter a valid URL for avatar
+               </p>
             </div>
             <div className="form-control flex flex-row items-center justify-center my-4">
               <label htmlFor="venueManager" className="text-black mb-2 mr-4">
