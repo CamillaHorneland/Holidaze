@@ -59,7 +59,6 @@ function RegisterForm() {
       }
 
       setUser(json);
-      console.log(json);
       navigate("/login");
 
     } catch (error) {

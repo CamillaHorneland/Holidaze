@@ -35,8 +35,7 @@ const UpdateProfileForm = () => {
 
       const response = await fetch(`${PROFILE_URL}/${user.name}`, options);
       const updatedUser = await response.json();
-      console.log('Profile Update Response:', updatedUser);
-
+     
       if (!response.ok) {
         throw new Error(updatedUser.message || 'Failed to update profile');
       }

@@ -50,7 +50,6 @@ function LoginForm() {
       }
 
       setUser(json);
-       console.log(json);
       navigate("/");
 
     } catch (error) {
