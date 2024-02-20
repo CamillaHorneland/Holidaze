@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ALLVENUES_URL } from '../../../constant/api';
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import image from '../../../assets/Addvenuesign.png';
 import { useUser } from '../../../hooks/type/UserContext';  
 import VenueForm from './form/VenueForm';
@@ -11,43 +12,44 @@ function AddVenueForm() {
   const navigate = useNavigate();
   const { user } = useUser();
 
+   const queryClient = useQueryClient();
+
   async function onSubmit(data) {
-  const formattedData = {
-    ...data,
-    media: typeof data.media === 'string' ? data.media.split(',').map(url => url.trim()) : data.media,
-  };
+    const formattedData = {
+      ...data,
+      media: typeof data.media === 'string' ? data.media.split(',').map(url => url.trim()) : data.media,
+    };
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${user.accessToken}`,
-  };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${user.accessToken}`,
+    };
 
-  const options = {
-    headers: headers,
-    method: 'POST',
-    body: JSON.stringify(formattedData),
-  };
+    const options = {
+      headers: headers,
+      method: 'POST',
+      body: JSON.stringify(formattedData),
+    };
 
-  try {
-    setIsLoading(true);
-    setError(null);
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await fetch(ALLVENUES_URL, options);
+      const json = await response.json();
 
-    const response = await fetch(ALLVENUES_URL, options);
+      if (!response.ok) {
+        throw new Error(json.errors?.[0]?.message ?? 'There was an error');
+      }
 
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      throw new Error(errorResponse.errors?.[0]?.message || 'There was an error');
+      queryClient.invalidateQueries('yourVenues');
+
+      navigate('/yourvenues');
+    } catch (error) {
+      setError(error.toString());
+    } finally {
+      setIsLoading(false);
     }
-
-    const json = await response.json();
-    console.log(json);
-    navigate('/yourvenues');
-  } catch (error) {
-    setError(error.toString());
-  } finally {
-    setIsLoading(false);
   }
-}
 
   return (
     <div className="m-10">
@@ -65,7 +67,5 @@ function AddVenueForm() {
 }
 
 export default AddVenueForm;
-
-
 
 

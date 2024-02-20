@@ -32,12 +32,19 @@ const schema = yup.object({
     .default([]),
   price: yup.number().required('Venue price is required'),
   maxGuests: yup.number().required('Max guests is required'),
-  rating: yup.number().optional(),
+  rating: yup.number(),
   meta: yup.object().shape({
-    wifi: yup.boolean().optional(),
-    parking: yup.boolean().optional(),
-    breakfast: yup.boolean().optional(),
-    pets: yup.boolean().optional(),
+    wifi: yup.boolean(),
+    parking: yup.boolean(),
+    breakfast: yup.boolean(),
+    pets: yup.boolean(),
+  }),
+  location: yup.object().shape({
+    address: yup.string().default("Unknown"),
+    city: yup.string().default("Unknown"),
+    zip: yup.string().default("Unknown"),
+    country: yup.string().default("Unknown"),
+    continent: yup.string().default("Unknown"),
   }),
 });
 
@@ -98,7 +105,15 @@ const schema = yup.object({
             <label htmlFor="rating" className="text-black mb-2">
               <span>Rating</span>
             </label>
-            <input type="number" className="p-4 bg-light-blue border border-blue rounded-md" {...register('rating')} />
+            <select className="p-4 bg-light-blue border border-blue rounded-md" {...register('rating')}>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
             {errors?.rating && <ValidationMessage>{errors.rating.message}</ValidationMessage>}
           </div>
 
@@ -107,9 +122,8 @@ const schema = yup.object({
               <span>WiFi</span>
             </label>
             <select className="p-4 bg-light-blue border border-blue rounded-md" {...register('meta.wifi')}>
-              <option value="">Select</option>
-              <option value={true}>Yes</option>
               <option value={false}>No</option>
+              <option value={true}>Yes</option>
             </select>
           </div>
 
@@ -118,9 +132,8 @@ const schema = yup.object({
               <span>Parking</span>
             </label>
             <select className="p-4 bg-light-blue border border-blue rounded-md" {...register('meta.parking')}>
-              <option value="">Select</option>
-              <option value={true}>Yes</option>
               <option value={false}>No</option>
+              <option value={true}>Yes</option>
             </select>
           </div>
 
@@ -129,9 +142,8 @@ const schema = yup.object({
               <span>Breakfast</span>
             </label>
             <select className="p-4 bg-light-blue border border-blue rounded-md" {...register('meta.breakfast')}>
-              <option value="">Select</option>
-              <option value={true}>Yes</option>
               <option value={false}>No</option>
+              <option value={true}>Yes</option>
             </select>
           </div>
 
@@ -140,9 +152,8 @@ const schema = yup.object({
               <span>Pets</span>
             </label>
             <select className="p-4 bg-light-blue border border-blue rounded-md" {...register('meta.pets')}>
-              <option value="">Select</option>
-              <option value={true}>Yes</option>
               <option value={false}>No</option>
+              <option value={true}>Yes</option>
             </select>
           </div>
 
