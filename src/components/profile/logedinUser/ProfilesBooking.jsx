@@ -40,6 +40,7 @@ const { data: bookingsData, isLoading, error } = useFetch(
   }
 
   const sortedBookings = bookingsData.sort((a, b) => new Date(a.dateFrom) - new Date(b.dateFrom));
+  const completedBookings = sortedBookings.filter((booking) => new Date(booking.dateTo) < new Date());
 
   return (
   <div>
@@ -93,56 +94,53 @@ const { data: bookingsData, isLoading, error } = useFetch(
             </div>
           </div>
         ))}
-    
-
-    <h2 className="text-xl font-bold text-dark-blue mt-6 mb-6">Completed Bookings</h2>
-
-    {sortedBookings
-      .filter((booking) => new Date(booking.dateTo) < new Date())
-      .map((booking) => (
-        <div key={booking.id} className="flex flex-col bg-light-blue p-4 mb-4 rounded-md md:flex-row">
-          <div className="flex-1">
-            <h2 className='text-2xl font-bold mt-8 mb-8'>{booking.venue.name}</h2>
-            <p className="font-bold">From:</p>
-            <p>{format(new Date(booking.dateFrom), 'EEEE dd.MM.yyyy')}</p>
-            <p className="font-bold mt-2">To:</p>
-            <p>{format(new Date(booking.dateTo), 'EEEE dd.MM.yyyy')}</p>
-            <p className="font-bold mt-2">Number of Nights:</p>
-            <p>{Math.max(differenceInDays(new Date(booking.dateTo), new Date(booking.dateFrom)), 1)}</p>
-            <p className="font-bold mt-2">Total Price:</p>
-            <p>{differenceInDays(new Date(booking.dateTo), new Date(booking.dateFrom)) * booking.venue.price}</p>
-            <p className="font-bold mt-2">Guests:</p>
-            <p>{booking.guests}</p>
-            <p className="font-bold mt-2">Booked:</p>
-            <p>{format(new Date(booking.created), 'EEEE dd.MM.yyyy')}</p>
-          </div>
-
-          <div className="flex-1 relative md:order-1 md:mb-0 mb-4">
-            <div className="max-h-96 overflow-hidden mb-2">
-              {booking.venue.media.length > 0 ? (
-                <img className="w-full h-auto" src={booking.venue.media[0]} alt={`Venue ${booking.venue.name}`} />
-              ) : (
-                <img className="w-full h-auto" src={DefaultImage} alt={`Default Venue Image`} />
-              )}
-            </div>
-            <Link
-              to={`/venuesspecific/${booking.venue.id}`}
-              className="block bg-dark-blue mb-5 text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
-            >
-              View Venues
-            </Link>
-            <DeleteButton
-              onDelete={() => {}}
-              user={user}
-              apiEndpoint={`${NEWBOOKING_URL}/${booking.id}`}  
-              invalidationKey={['data']}
-            />
-            <p className="text-red-500 mt-2">
-              If you delete this booking later than 48 hours before the from date, you will still be charged for the booking.
-            </p>
-          </div>
+      {completedBookings.length > 0 && (
+  <>
+    <h2 className="text-xl font-bold text-dark-blue mt-16 m-10">Completed Bookings</h2>
+    {completedBookings.map((booking) => (
+      <div key={booking.id} className="flex flex-col bg-light-blue p-4 mb-4 rounded-md md:flex-row">
+        <div className="flex-1">
+          <h2 className='text-2xl font-bold mt-8 mb-8'>{booking.venue.name}</h2>
+          <p className="font-bold">From:</p>
+          <p>{format(new Date(booking.dateFrom), 'EEEE dd.MM.yyyy')}</p>
+          <p className="font-bold mt-2">To:</p>
+          <p>{format(new Date(booking.dateTo), 'EEEE dd.MM.yyyy')}</p>
+          <p className="font-bold mt-2">Number of Nights:</p>
+          <p>{Math.max(differenceInDays(new Date(booking.dateTo), new Date(booking.dateFrom)), 1)}</p>
+          <p className="font-bold mt-2">Total Price:</p>
+          <p>{differenceInDays(new Date(booking.dateTo), new Date(booking.dateFrom)) * booking.venue.price}</p>
+          <p className="font-bold mt-2">Guests:</p>
+          <p>{booking.guests}</p>
+          <p className="font-bold mt-2">Booked:</p>
+          <p>{format(new Date(booking.created), 'EEEE dd.MM.yyyy')}</p>
         </div>
-      ))}
+
+        <div className="flex-1 relative md:order-1 md:mb-0 mb-4">
+          <div className="max-h-96 overflow-hidden mb-2">
+            {booking.venue.media.length > 0 ? (
+              <img className="w-full h-auto" src={booking.venue.media[0]} alt={`Venue ${booking.venue.name}`} />
+            ) : (
+              <img className="w-full h-auto" src={DefaultImage} alt={`Default Venue Image`} />
+            )}
+          </div>
+          <Link
+            to={`/venuesspecific/${booking.venue.id}`}
+            className="block bg-dark-blue mb-5 text-center text-white p-2 rounded-md hover:bg-white hover:text-dark-blue border border-dark-blue"
+          >
+            View Venues
+          </Link>
+          <DeleteButton
+            onDelete={() => {}}
+            user={user}
+            apiEndpoint={`${NEWBOOKING_URL}/${booking.id}`}
+            invalidationKey={['data']}
+          />
+        </div>
+      </div>
+    ))}
+  </>
+)}
+        
       </div>
   </div>
  );
