@@ -32,29 +32,29 @@ const VenueDetail = () => {
         <>
           <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">{data.name}</h1>
 
-          <div className='h-1/5 sm:w-4/4 md:w-3/4 lg:w-2/4 m-10 mb-10 overflow-hidden'>
+          <div className='sm:w-3/4 md:w-3/4 lg:w-3/4 max:h-2/3 m-10 mb-16'>
             <img
               src={
                 selectedImageIndex !== null && data.media.length > 0
-                  ? data.media[selectedImageIndex]
-                  : DefaultImage
+                ? data.media[selectedImageIndex]
+                : DefaultImage
               }
               alt={data.name}
-              className='rounded-md'
-            />
-
-            {data.media.length > 1 && (
-              <div className='flex flex-wrap justify-center lg:justify-center '>
-                {data.media.map((image, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleThumbnailClick(index)}
-                    className='w-2/4 cursor-pointer p-2'>
-                    <img src={image} alt={data.name} className='w-full h-auto object-cover rounded-md'/>
-                  </div>
-                ))}
-              </div>
-            )}
+              className='w-full h-full object-cover rounded-md'
+              />
+              
+              {data.media.length > 1 && (
+                <div className='flex flex-wrap justify-center lg:justify-center '>
+                  {data.media.map((image, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleThumbnailClick(index)}
+                      className='w-1/4 sm:w-1/6 md:w-1/6 lg:w-1/6 cursor-pointer p-2'>
+                        <img src={image} alt={data.name} className='w-full h-auto object-cover rounded-md' />
+                    </div>
+                  ))}
+                </div>
+                )}
           </div>
 
           <div className="mb-4 m-10">
