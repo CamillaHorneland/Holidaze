@@ -44,16 +44,21 @@ function ConfirmationModal({ startDate, endDate, guests, venueId, onClose, price
   
   const formattedStartDate = format(new Date(startDate), 'EEEE dd.MM.yyyy');
   const formattedEndDate = format(new Date(endDate), 'EEEE dd.MM.yyyy');
-  const numberOfNights = differenceInDays(new Date(endDate), new Date(startDate));
-  const totalCost = price * numberOfNights;
+  const numberOfNights = startDate && endDate ? differenceInDays(new Date(endDate), new Date(startDate)) : 0;
+  const totalCost = startDate && endDate ? price * numberOfNights : 0;
 
   const handleBookingConfirm = async () => {
-    try {
-      setConfirming(true);
+  try {
+    setConfirming(true);
 
-      if (!user || !user.accessToken) {
-        throw new Error('User is not defined or missing access token.');
-      }
+    if (!user || !user.accessToken) {
+      throw new Error('User is not defined or missing access token.');
+    }
+
+    const numberOfNights = startDate && endDate ? differenceInDays(new Date(endDate), new Date(startDate)) : 0;
+    if (numberOfNights < 1) {
+      throw new Error('You have to book minimum 1 overnight.');
+    }
 
       await createBooking({
         dateFrom: startDate,
@@ -65,7 +70,7 @@ function ConfirmationModal({ startDate, endDate, guests, venueId, onClose, price
 
       setBookingComplete(true);
     } catch (error) {
-      console.error('Error confirming booking:', error);
+      // console.error('Error confirming booking:', error);
 
       if (error.message.includes('Booking failed')) {
         setBookingErrorMessage('Problem completing this booking. Try again or choose different dates.');
