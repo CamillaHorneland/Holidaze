@@ -35,8 +35,7 @@ function YourVenues() {
    if (!venuesData || venuesData.length === 0) {
     return <div><h1 className="text-2xl font-bold text-dark-blue m-10 mb-10">No venues available for this profile.</h1></div>;
   }
-
- 
+  
   return (
   <div>
     <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">Your Venues</h1>
@@ -93,24 +92,26 @@ function YourVenues() {
           </div>
 
           {venue.bookings && venue.bookings.length > 0 ? (
-            <div className="mt-4">
-              <h3 className="text-lg font-bold">Bookings:</h3>
-              <ul>
-                {venue.bookings.map((booking) => (
-                  <li key={booking.id} className='m-5 mb-8'>
-                    <p>Date From: {format(new Date(booking.dateFrom), 'EEEE dd.MM.yyyy')}</p>
-                    <p>Date To: {format(new Date(booking.dateTo), 'EEEE dd.MM.yyyy')}</p>
-                    <p>Guests: {booking.guests}</p>
-                    <p>Created: {format(new Date(booking.created), 'EEEE dd.MM.yyyy')}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <p className="m-8">There are no bookings on this venue at this time.</p>
-          )}
-          
-        </div>
+              <div className="mt-4">
+                <h3 className="text-lg font-bold">Bookings:</h3>
+                <ul>
+                  {venue.bookings
+                    .sort((a, b) => new Date(a.dateFrom) - new Date(b.dateFrom)) 
+                    .map((booking) => (
+                      <li key={booking.id} className={`m-5 mb-8 ${new Date(booking.dateTo) < new Date() ? 'line-through' : ''}`}>
+                        <p>Date From: {format(new Date(booking.dateFrom), 'EEEE dd.MM.yyyy')}</p>
+                        <p>Date To: {format(new Date(booking.dateTo), 'EEEE dd.MM.yyyy')}</p>
+                        <p>Guests: {booking.guests}</p>
+                        <p>Created: {format(new Date(booking.created), 'EEEE dd.MM.yyyy')}</p>
+                     </li>
+                    ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="m-8">There are no bookings on this venue at this time.</p>
+            )}
+
+          </div>
       ))}
     </div>
   </div>
