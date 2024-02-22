@@ -2,6 +2,7 @@ import React from "react";
 import ImageBack from "../landing/background"; 
 import { Link } from "react-router-dom"; 
 import VenueFilter from "../venues/VenueFilter";
+import InfoVenueManager from "../profile/venuemanger/IfonVenueManager";
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
             <h1 className="text-white text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 mt-10">
               Travel the world with Holidaze
             </h1>
-            <h2 className="text-white text-base sm:text-lg lg:text-2xl xl:text-3xl mb-10">
+            <h2 className="text-white text-base sm:text-lg lg:text-2xl xl:text-3xl m-10">
               Secure your venue for your upcoming trip here
             </h2>
           </div>
@@ -30,6 +31,7 @@ const Home = () => {
            Or Explore All Venues
         </Link>
       </div>
+     <InfoVenueManager />
     </div>
   );
 };

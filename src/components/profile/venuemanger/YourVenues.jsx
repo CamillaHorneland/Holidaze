@@ -9,7 +9,7 @@ import DeleteButton from '../../delete/Delete';
 
 function YourVenues() {
   const { name: profileName } = useParams();
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const { data: venuesData, isLoading, error } = useFetch(
     `${PROFILE_URL}/${user.name}/venues?_bookings=true`,
     {
