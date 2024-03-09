@@ -14,21 +14,23 @@
 |Hosted Demo|https://holidaze-camilla-horneland.netlify.app/
 |Kanban Board |https://github.com/users/CamillaHorneland/projects/2/views/4
 
-## Goal
+## Description
+
+### Goal
 
 To take the skills learned over the last two years and take on an extensive project where the finished product should reflect the candidate’s general development capabilities, in addition to visual and technical skills.
 
-## Brief
+### Brief
 
 A newly launched accommodation booking site called Holidaze has approached you to develop a brand new front end for their application. While they have a list of required features, the design and user experience has not been specified. Working with the official API documentation, plan, design and build a modern front end accommodation booking application.
 
 There are two aspects to this brief: the customer-facing side of the website where users can book holidays at a venue, and an admin-facing side of the website where users can register and manage venues and bookings at those venues.
 
-## Requirements
+### Requirements
 
 All API functionality is managed by an existing application. This project only covers the front-end application for the API.
 
-## User stories
+### User stories
 
 The client has specified the following requirements in the form of User Stories:
  
@@ -49,7 +51,7 @@ The client has specified the following requirements in the form of User Stories:
     - A registered user may logout
 
 
-## Technical restrictions
+### Technical restrictions
 
 The company CTO has set the following technical restrictions:
 
@@ -59,7 +61,7 @@ The company CTO has set the following technical restrictions:
 - Must use an approved Design Application
 - Must use an approved Planning Application
 
-# Built With:
+## Built With:
 
 - Adobe XD
 - Tailwind
@@ -71,19 +73,45 @@ The company CTO has set the following technical restrictions:
 - Netlify - Static host
 - [Noroff API](https://docs.noroff.dev/)
 
-# Getting Started
-## Installing
+## Getting Started
+### Installing
 1.Clone the repo:
 
      git clone https://github.com/CamillaHorneland/Holidaze
 
-## Development 
+2.Install NPM packages/dependencies
+
+    cd Holidaze
+    npm install
+
+3.Start the project
+
+    npm start
+
+### Development
 
 To start the development server with Vite, run:
 
       npm run dev
 
-# Acknowledgments
+### Development 
+
+To start the development server with Vite, run:
+
+      npm run dev
+
+### Contributing
+This project is for academic purposes only, and therefore, contributions are not permitted.
+
+### Contact
+
+<a href="mailto:hornikkene@gmail.com?">My Mail</a>
+
+<a href="https://camilla-horneland-portfolio.netlify.app/">My Portfolio</a>
+
+<a href="https://www.linkedin.com/in/camilla-horneland-706bb5239/">My LinkedIn page</a>
+
+### Acknowledgments
 
     Noroff - School of technology and digital media
     React documentation
@@ -91,14 +119,6 @@ To start the development server with Vite, run:
     ChatGPT
     https://www.freepik.com
 
-## Badges
+### Badges
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bbf80ba2-eb42-419a-ba3d-349f243c984e/deploy-status)](https://app.netlify.com/sites/holidaze-camilla-horneland/deploys)
-
-## Contact
-
-<a href="mailto:hornikkene@gmail.com?">My Mail</a> 
-
-<a href="https://portfoliocamillahorneland.netlify.app/">My Portfolio</a>
-
-<a href="https://www.linkedin.com/in/camilla-horneland-706bb5239/">My LinkedIn page</a>    
