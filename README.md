@@ -94,12 +94,6 @@ To start the development server with Vite, run:
 
       npm run dev
 
-### Development 
-
-To start the development server with Vite, run:
-
-      npm run dev
-
 ### Contributing
 This project is for academic purposes only, and therefore, contributions are not permitted.
 
