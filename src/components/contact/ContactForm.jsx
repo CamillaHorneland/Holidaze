@@ -43,7 +43,6 @@ function ContactForm() {
       <h1 className="text-3xl font-bold mb-6 text-dark-blue">
         Contact us
       </h1>
-      {/* <ImageBack big /> */}
       <div className=" text-center w-full ">
         {isFormSubmitted ? (
           <div>
