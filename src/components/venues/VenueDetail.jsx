@@ -32,7 +32,7 @@ const VenueDetail = () => {
         <>
           <h1 className="text-3xl font-bold text-dark-blue m-10 mb-10">{data.name}</h1>
 
-          <div className='sm:w-3/4 md:w-3/4 lg:w-3/4 max:h-2/3 m-10 mb-16'>
+          <div className='sm:w-4/4 md:w-2/3 lg:w-2/3  m-10 mb-16'>
             <img
               src={
                 selectedImageIndex !== null && data.media.length > 0
@@ -40,7 +40,7 @@ const VenueDetail = () => {
                 : DefaultImage
               }
               alt={data.name}
-              className='w-full h-full object-cover rounded-md'
+              className="object-cover w-full h-full" 
               />
               
               {data.media.length > 1 && (
