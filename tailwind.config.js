@@ -9,6 +9,7 @@ export default {
         'dark-blue': '#5490A0'
       },
     },
+    
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };
