@@ -1,72 +1,53 @@
 import React, { useState } from 'react';
-import ImageBack from '../landing/background';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import ImageBack from '../landing/background';
+
+// Definer skjema for yup-validering
+const schema = yup.object({
+  email: yup
+    .string()
+    .email('Please enter a valid email address')
+    .required('Email is required'),
+  body: yup
+    .string()
+    .min(3, 'Body must be at least 3 characters')
+    .required('Body is required'),
+}).required();
 
 function ContactForm() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  function onFormSubmit(event) {
-    event.preventDefault();
+  // Initialiser react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    if (validateForm()) {
-      const formData = {
-        email,
-        body,
-      };
+  const onSubmit = (data) => {
+    localStorage.setItem('contactForm', JSON.stringify(data));
 
-      console.log(formData);
+    console.log(data);
 
-      // Sett isFormSubmitted til true
-      setIsFormSubmitted(true);
-
-      setEmail('');
-      setBody('');
-    }
-  }
-
-  function onTextInputChange(event) {
-    const value = event.target.value;
-    const name = event.target.name;
-
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'body') {
-      setBody(value);
-    }
-  }
-
-  function validateForm() {
-    if (!isValidEmail(email)) {
-      alert('Please enter a valid email address.');
-      return false;
-    }
-
-    if (body.length < 3) {
-      alert('Body must be at least 3 characters.');
-      return false;
-    }
-
-    return true;
-  }
-
-  function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
+    setIsFormSubmitted(true);
+  };
 
   return (
-    <div className="relative m-10">
+    <div className=" m-10">
       <h1 className="text-3xl font-bold mb-6 text-dark-blue">
         Contact us
       </h1>
-      <ImageBack big />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full z-20">
+      {/* <ImageBack big /> */}
+      <div className=" text-center w-full ">
         {isFormSubmitted ? (
           <div>
-            <h2 className="text-white text-2xl mt-16">Your message was sent</h2>
+            <h2 className="text-dark-blue text-2xl mt-16">Your message was sent</h2>
             <button
               onClick={() => navigate('/')}
               className="bg-dark-blue text-white py-4 px-10 rounded-full cursor-pointer
@@ -75,29 +56,27 @@ function ContactForm() {
             </button>
           </div>
         ) : (
-          <form onSubmit={onFormSubmit} className="max-w-md mx-auto rounded-lg">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 m-8">
+          <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto rounded-lg">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 m-20">
             </label>
             <input
               type="email"
               name="email"
-              value={email}
               placeholder="Your email"
-              onChange={onTextInputChange}
+              {...register('email')}
               className="w-full mt-2 p-3 border border-gray-300 rounded-md"
-              required
             />
+            {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
             <label htmlFor="body" className="block mt-4 text-sm font-medium text-gray-700 m-8">
             </label>
             <textarea
               name="body"
-              value={body}
               placeholder="Your message"
-              onChange={onTextInputChange}
+              {...register('body')}
               className="w-full mt-2 p-3 border border-gray-300 rounded-md"
-              required
             />
+            {errors.body && <p className="text-red-500">{errors.body.message}</p>}
 
             <button
               type="submit"
@@ -113,6 +92,7 @@ function ContactForm() {
 }
 
 export default ContactForm;
+
 
 
 
