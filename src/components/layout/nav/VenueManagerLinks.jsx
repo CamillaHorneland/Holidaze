@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const VenueManagerLinks = ({ closeMobileMenu }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
+  const location = useLocation();
 
   const handleMouseEnter = () => {
     setShowSubMenu(true);
@@ -23,7 +24,7 @@ const VenueManagerLinks = ({ closeMobileMenu }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <div
-        className="mx-4 m-2 group transition-all hover:text-lg  border border-white rounded-md px-2 p-2 relative"
+        className="mx-4 m-2 group transition-all border border-white rounded-md px-2 p-2 relative"
         onClick={handleMouseEnter} >
         Venue Manager
         {showSubMenu && (
@@ -33,13 +34,13 @@ const VenueManagerLinks = ({ closeMobileMenu }) => {
             onMouseLeave={handleMouseLeave}>
             <NavLink
               to="/YourVenues"
-              className="block transition-all text-blue"
+              className={`block transition-all text-blue ${location.pathname === '/YourVenues' ? 'text-lg' : ''}`}
               onClick={handleLinkClick}>
               Your Venues
             </NavLink>
             <NavLink
               to="/AddVenue"
-              className="block transition-all text-blue"
+              className={`block transition-all text-blue ${location.pathname === '/AddVenue' ? 'text-lg' : ''}`}
               onClick={handleLinkClick}>
               Add Venues
             </NavLink>
@@ -51,6 +52,7 @@ const VenueManagerLinks = ({ closeMobileMenu }) => {
 };
 
 export default VenueManagerLinks;
+
 
 
 

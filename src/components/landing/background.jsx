@@ -9,7 +9,7 @@ const ImageBack = ({ big = true }) => {
   return (
     <div className="relative">
       <img
-        className="w-full h-auto"
+        className="cover"
         src={Background}
         alt="BackgroundSign"
       />
